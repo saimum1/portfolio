@@ -174,8 +174,8 @@ const Hero = () => {
                                        <img className='boximage'  src={`${config.apiUrl}/${value?.image_url}`} style={{ height: '12rem', width: '100%'}} alt="Featured" />
                                    </div>
                                </div>
-                                    <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color,fontSize: '1.6rem', fontWeight: '600' }}>{value?.title}</span>
-                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
+                                    <span style={{ flex: 1, height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color,fontSize: '1.6rem', fontWeight: '600' }}>{value?.title}</span>
+                                    <span style={{ flex: 2,  height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
                                 </div>
 
                                 </a>
