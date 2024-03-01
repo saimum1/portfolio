@@ -63,7 +63,7 @@ const Navabar = () => {
                >
                    Logo
                </div>
-            <div style={{flex:1,display : 'flex', gap : '8%', alignItems : 'center' ,justifyContent:'flex-end',color:'#000'}}>
+            <div style={{flex:1,display : 'flex', gap : '8%', alignItems : 'center' ,justifyContent:'flex-end'}}>
   
                 
 
