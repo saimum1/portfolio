@@ -77,7 +77,9 @@ const Projectpage = () => {
                     <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',gap:'2rem'}}>
                           <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-start',flexDirection:'column',gap:'1rem'}}>
                             
-                            <span style={{fontSize:'2rem' ,fontWeight:'500'}}> All Projects</span>
+                            {/* <span style={{fontSize:'2rem' ,fontWeight:'500'}}> All Projects</span> */}
+                          <span style={{  color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2rem'}}> All Projects</span>
+
                             <span style={{backgroundColor:'#999999',width:'100%',height:'1px'}}> </span>
                             </div>
   

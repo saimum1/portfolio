@@ -75,14 +75,14 @@ const Hero = () => {
               <div style={{width:'70%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',marginTop:'4.5rem',background:''}}>
 
                   <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column'}}>
-                        <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-end'}}><span style={{fontSize:'7rem' ,fontWeight:'700'}}>I'M A PRODUCT</span></div>
+                        <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-end'}}><span style={{fontSize:'7rem' ,fontWeight:'700',color:global_css.third_txt_color}}>I'M A PRODUCT</span></div>
 
 
 
 
                       <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'space-between',alignItems:'center' ,marginRight:'30px' ,marginLeft:'30px'}}>
                         <div >
-                          <span style={{fontSize:'7rem' ,fontWeight:'700'}}>DESIGNER</span>
+                          <span style={{fontSize:'7rem' ,fontWeight:'700',color:global_css.third_txt_color}}>DESIGNER</span>
                         </div>
 
                         <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',position:'relative'}}>
@@ -117,7 +117,8 @@ const Hero = () => {
                         <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-start',flexDirection:'column',gap:'1rem'}}>
                           
                           <span style={{color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2rem'}}> SELECTED WORK</span>
-                          <span style={{backgroundColor:'#9996C757D999',width:'100%',height:'1.5px'}}> </span>
+                          <span style={{backgroundColor:'#6C757D',width:'100%',height:'1.5px'}}> </span>
+
                           </div>
 
 
@@ -138,14 +139,15 @@ const Hero = () => {
                                         </div>
                                     </div>
 
-                                    <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '2rem', fontWeight: '700' }}>{value?.title}</span>
-                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
+                                    <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color, fontSize: '1.6rem', fontWeight: '600' }}>{value?.title}</span>
+                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
                                 </div>
                                 </Link>
                             ))}
                         </div>
                   </div>
 
+                <div style={{height:'4rem'}}></div>
                 <div style={{height:'4rem'}}></div>
 
 
@@ -156,6 +158,8 @@ const Hero = () => {
                           <span style={{  color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2rem'}}> WRITING</span>
                           <span style={{backgroundColor:'#6C757D',width:'100%',height:'1.5px'}}> </span>
                           </div>
+
+
 
 
                           <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem',transition:'all 300ms',cursor:'pointer'}}>
@@ -170,34 +174,13 @@ const Hero = () => {
                                        <img className='boximage'  src={`${config.apiUrl}/${value?.image_url}`} style={{ height: '12rem', width: '100%'}} alt="Featured" />
                                    </div>
                                </div>
-                                    <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '2rem', fontWeight: '700' }}>{value?.title}</span>
-                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
+                                    <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color,fontSize: '1.6rem', fontWeight: '600' }}>{value?.title}</span>
+                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
                                 </div>
 
                                 </a>
                             ))}
                         </div>
-
-                          
-                        {/* <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem',transition:'all 300ms',cursor:'pointer'}}>
-                          {data?.filter((value)=> {return  value?.selected === 'true' &&  value?.category === 'write'})?.map((value, index) => (
-
-                            <a href={value?.content} target='blank' >
-                            <div 
-
-                            
-
-                            className='box'
-                            key={index} style={{ background: '', height: '20rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',flexDirection:'column',gap:'0.6rem' }}>
-                              <div style={{flex:4,backgroundColor:'',height:'100%' ,width:'100%'}}>
-                                <img src={`${config.apiUrl}/${value?.image_url}`}  style={{height:'12rem' ,width:'100%'}}/>
-                              </div>
-                              <span style={{flex:1,backgroundColor:'',height:'100%' ,display:'flex',width:'100%',color:'#000',fontFamily:'Inter',fontSize:'2rem',fontWeight:"700"}}>{value?.title}</span>
-                              <span style={{flex:2,backgroundColor:'',height:'100%' ,width:'100%',color:'#000',fontFamily:'Inter',fontSize:'1rem',fontWeight:"400"}}>{value?.description}</span>
-                            </div>
-                            </a>
-                          ))}
-                        </div> */}
                   </div>
 
               </div>

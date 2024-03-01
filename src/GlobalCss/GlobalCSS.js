@@ -4,6 +4,7 @@ export  const global_css={
     'secondary_btn':'#1EAB5E',
     'primary_txt_color':'rgba(255, 255, 255, 0.75)',
     'secondary_txt_color':'rgba(255, 255, 255, 0.6)',
+    'third_txt_color':'#383f4c',
     'primary_inputfield':'#444444',
     'primary_card_bg':'#303038',
     'card_border_radius'  : '8px',

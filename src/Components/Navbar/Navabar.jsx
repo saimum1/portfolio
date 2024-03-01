@@ -10,6 +10,7 @@ import usaimagesvg from '../Navbar/Image/US.svg'
 import companylogo from '../../assets/static/companylogo.svg'
 import {useAuth} from "../../Context/AuthInfo.jsx";
 import { useNavigate } from 'react-router-dom';
+import { global_css } from '../../GlobalCss/GlobalCSS.js';
 const Navabar = () => {
     const { userId , logout} = useAuth();
   const[clicked,setclicked]=useState(false)
@@ -71,7 +72,7 @@ const Navabar = () => {
                 {itemlist?.map((i)=>{
                               return (
                                 <span  
-                                style={{cursor:'pointer'}}
+                                style={{cursor:'pointer',color:global_css.third_txt_color,fontWeight:'500'}}
                                 // className={style.texteffect}
                                 onMouseDown={(e)=>{(e.currentTarget.style.color='red');}}
                                 onMouseUp={(e)=>(e.currentTarget.style.color='#000')}
@@ -92,7 +93,7 @@ const Navabar = () => {
             .navbar {
                 transition: box-shadow 400ms ease;
                 background-color:transparent;
-                height:4.5rem;
+                height:5rem;
                 transition: all 400ms ;
 
 
