@@ -16,6 +16,12 @@ const Postpage = () => {
     setPost(selectedPost);
   }
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+      duration: 7000, 
+       // Use smooth scrolling behavior
+    });
     getdata()
    
   }, [postId]);
@@ -87,7 +93,26 @@ const Postpage = () => {
              <style jsx>
               {`
   
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  html {
+    scroll-behavior: smooth;
+    transition:all 300ms;
+
+  }
   
+  body {
+    -ms-overflow-style: none;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    transition:all 300ms;
+  }
+  
+  /* Hide scrollbar for Firefox */
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
   
               .marquee-w {
               position: relative;

@@ -36,6 +36,8 @@ import AlertBox from "../AlertBox/AlertBox.jsx";
 import Nodatafound from "../NoDataFound/Nodatafound.jsx";
 import LoadingSoS from "../LoadingScreen/LoadingSoS.jsx";
 import Popnotification from "../PopNotification/Popnotification.jsx";
+import { Link } from 'react-router-dom';
+
 const Projectpage = () => { 
   const [post, setPost] = useState(null);
     const itemlist=['About' ,'Projects' ,'Blog' ,'Resume']
@@ -48,6 +50,12 @@ const Projectpage = () => {
       setPost(response?.data);
     }
     useEffect(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+        duration: 7000, 
+         // Use smooth scrolling behavior
+      });
       getdata()
      
     }, []);
@@ -78,14 +86,23 @@ const Projectpage = () => {
   
                             
                           <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem',transition:'all 300ms',cursor:'pointer'}}>
-                            {post?.map((value, index) => (
-                              <div onClick={()=>openpost(value?.postid)} className='box' key={index} style={{ background: '', height: '25rem', width: '85%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',flexDirection:'column',gap:'0.6rem' }}>
-                                <div style={{flex:4,backgroundColor:'',height:'100%' ,width:'100%'}}>
-                                  <img src={`${config.apiUrl}/${value?.image_url}`}  style={{height:'15rem' ,width:'100%'}}/>
-                                </div>
-                                <span style={{flex:1,backgroundColor:'',height:'100%' ,display:'flex',width:'100%',color:'#000',fontFamily:'Inter',fontSize:'2rem',fontWeight:"700"}}>{value?.title}</span>
-                                <span style={{flex:2,backgroundColor:'',height:'100%' ,width:'100%',color:'#000',fontFamily:'Inter',fontSize:'1rem',fontWeight:"400"}}>{value?.description}</span>
-                              </div>
+                            {post?.filter((value)=> {return  value?.category === 'post'})?.map((value, index) => (
+
+                                    <Link to={`/postpage/${value?.postid}`}>
+                                    <div
+                                      key={index} style={{ background: '', height: '25rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem' }}>
+                                        
+                                        <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
+                                        
+                                            <div  className='box' style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%',borderRadius:'5px',border:'1px solid #999999' }}>
+                                                <img className='boximage'  src={`${config.apiUrl}/${value?.image_url}`} style={{ height: '17rem', width: '100%'}} alt="Featured" />
+                                            </div>
+                                        </div>
+
+                                        <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '2rem', fontWeight: '700' }}>{value?.title}</span>
+                                        <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
+                                    </div>
+                                    </Link>
                             ))}
                           </div>
                     </div>
@@ -192,13 +209,7 @@ const Projectpage = () => {
     font-size: 4rem;
     animation: marquee 9s linear infinite;
   }
-  .box{
-    transition:all 300ms;
-  }
-  .box:hover{
-    transform:scale(1.05);
-    transition:all 300ms;
-  }
+
   .marquee2 span {
     animation-delay: 5s;
   }
@@ -209,7 +220,62 @@ const Projectpage = () => {
     100% {
         transform: translate(-100%, 0);
     }
-  }`}
+  }
+  
+  
+  
+  
+  
+.boxparent{
+  transition:all 300ms;
+}
+
+.boxparent:hover{
+  box-shadow:2px 2px 15px  #0055bc;
+  transition:all 300ms;
+}
+.box{
+  transition:all 300ms;
+  overflow:hidden;
+
+}
+
+.box:hover{
+  box-shadow:1px 1px 10px solid  #999990;
+  transition:all 300ms;
+  
+
+}
+
+.boximage{
+  transition:all 500ms;
+
+  
+
+}
+.boximage:hover{
+  transform:scale(1.3);
+  transition:all 300ms;
+  box-shadow:1px 1px 15px #999990;
+  transition:all 500ms;
+}
+.marquee2 span {
+  animation-delay: 5s;
+}
+@keyframes marquee {
+  0% {
+      transform: translate(0, 0);
+  }
+  100% {
+      transform: translate(-100%, 0);
+  }
+}
+
+  
+  
+  
+  
+  `}
              </style>
          
       </div>

@@ -37,13 +37,16 @@ import AlertBox from "../AlertBox/AlertBox.jsx";
 import Nodatafound from "../NoDataFound/Nodatafound.jsx";
 import LoadingSoS from "../LoadingScreen/LoadingSoS.jsx";
 import Popnotification from "../PopNotification/Popnotification.jsx";
+import { Link } from 'react-router-dom';
 const Hero = () => {
 
 
   const [data,setdata]=useState([])
   const openpost=(e)=>{
     console.log("eeee",e)
-    window.location.href = `/postpage/${e}`
+    // window.location.href = `/postpage/${e}`
+    // return <Link to={`/postpage/${e}`} />;
+    return <Link to={`/postpage/${e}`} />; 
   }
 
   const getdata=async()=>{
@@ -53,6 +56,12 @@ const Hero = () => {
     setdata(response?.data)
   }
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+      duration: 7000, 
+       // Use smooth scrolling behavior
+    });
     getdata()
   }, [])
 
@@ -107,7 +116,7 @@ const Hero = () => {
                   <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',gap:'2rem'}}>
                         <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-start',flexDirection:'column',gap:'1rem'}}>
                           
-                          <span style={{fontSize:'2rem' ,fontWeight:'500',color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2rem'}}> SELECTED WORK</span>
+                          <span style={{color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2rem'}}> SELECTED WORK</span>
                           <span style={{backgroundColor:'#9996C757D999',width:'100%',height:'1.5px'}}> </span>
                           </div>
 
@@ -117,7 +126,10 @@ const Hero = () => {
                           
                         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem',transition:'all 300ms',cursor:'pointer'}}>
                          {data?.filter((value)=> {return value?.selected === 'true' && value?.category === 'post'})?.map((value, index) => (
-                                <div onClick={()=>openpost(value.postid)} key={index} style={{ background: '', height: '25rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem' }}>
+                               
+                               <Link to={`/postpage/${value?.postid}`}>
+                               <div
+                                  key={index} style={{ background: '', height: '25rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem' }}>
                                    
                                    <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                    
@@ -129,6 +141,7 @@ const Hero = () => {
                                     <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '2rem', fontWeight: '700' }}>{value?.title}</span>
                                     <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
                                 </div>
+                                </Link>
                             ))}
                         </div>
                   </div>
@@ -140,14 +153,16 @@ const Hero = () => {
                 <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',gap:'2rem'}}>
                         <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-start',flexDirection:'column',gap:'1rem'}}>
                           
-                          <span style={{fontSize:'2rem' ,fontWeight:'500' ,color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2rem'}}> WRITING</span>
+                          <span style={{  color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2rem'}}> WRITING</span>
                           <span style={{backgroundColor:'#6C757D',width:'100%',height:'1.5px'}}> </span>
                           </div>
 
 
                           <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem',transition:'all 300ms',cursor:'pointer'}}>
                          {data?.filter((value)=> {return value?.selected === 'true' && value?.category === 'write'})?.map((value, index) => (
-                                <div onClick={()=>openpost(value.postid)} key={index} style={{ background: '', height: '20rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem' }}>
+                          <a href={value?.content} target='blank'>
+                                <div 
+                                 key={index} style={{ background: '', height: '20rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem' }}>
 
                               <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                    
@@ -158,6 +173,8 @@ const Hero = () => {
                                     <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '2rem', fontWeight: '700' }}>{value?.title}</span>
                                     <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
                                 </div>
+
+                                </a>
                             ))}
                         </div>
 
