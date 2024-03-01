@@ -57,7 +57,7 @@ const Projectpage = () => {
       window.location.href = `/postpage/${e}`
     }
     return (
-      <div style={{width:'100%' ,height:'100vh',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column'}}>
+      <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column'}}>
              
   
               <div style={{width:'70%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',marginTop:'4.5rem',background:''}}>
