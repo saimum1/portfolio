@@ -102,7 +102,7 @@ const Projectpage = () => {
                                         </div>
 
                                         <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '2rem', fontWeight: '700' }}>{value?.title}</span>
-                                        <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
+                                        <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' ,textAlign:'justify'}}>{value?.description}</span>
                                     </div>
                                     </Link>
                             ))}
@@ -162,8 +162,8 @@ const Projectpage = () => {
   
   body {
     -ms-overflow-style: none;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
   }
-
 
   ::-webkit-scrollbar {
     width: 0; /* Remove scrollbar width */

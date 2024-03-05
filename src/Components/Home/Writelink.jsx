@@ -1,5 +1,4 @@
 import React, { useState ,useEffect} from 'react';
-import JoditEditor from 'jodit-react';
 import axios from "axios";
 import config from "../../config.jsx";
 import AlertBox from '../AlertBox/AlertBox.jsx';
@@ -26,6 +25,8 @@ const Writelink = ({updateitem,status,getpageaction}) => {
     const [id,setid]=useState('')
     const [linkurl,setlinkurl]=useState('')
     const [photourl,setphotourl]=useState('')
+  const[statusset,setstatusset]=useState('')
+
     const generateUniqueId = () => {
       // Generate a unique ID
       return '_' + Math.random().toString(36).substr(2, 9);
@@ -56,13 +57,13 @@ const Writelink = ({updateitem,status,getpageaction}) => {
     const ondecision=(e)=>{
   e.preventDefault()
      
-        if(status === true){
+        if(statusset === true){
           onAlertOpen();
           setAlertType('warning');
           setAlertText('Are you sure you want to update the data?'); 
           setAlertButtonTextSecond('Cancel');
           setAlertButtonText('Yes, Update')
-        }else if(status === false){
+        }else if(statusset === false){
           onAlertOpen();
           setAlertType('success');
           setAlertText('Are you sure you want to save?'); 
@@ -74,7 +75,7 @@ const Writelink = ({updateitem,status,getpageaction}) => {
     }
   
     const handleSubmit =async() => {
-      if(status === false){
+      if(statusset === false){
       console.log("Featured photo in state:", featuredPhoto);
       // event.preventDefault();
       let formData = new FormData()
@@ -106,7 +107,7 @@ const Writelink = ({updateitem,status,getpageaction}) => {
      setshowpopup(true)
      setTimeout(async() => {
          setshowpopup(false)
-         let d={'id':'','case':0}
+         let d={'id':'','case':1}
          await getpageaction(d)
      }, 1500);
   }else if(responses.data.status === 500){
@@ -147,7 +148,7 @@ const Writelink = ({updateitem,status,getpageaction}) => {
         throw error;
     }
   
-  }else if(status === true){
+  }else if(statusset === true){
     try {
   
               if(featuredPhoto === ''){
@@ -172,7 +173,7 @@ const Writelink = ({updateitem,status,getpageaction}) => {
               setshowpopup(true)
               setTimeout(async() => {
                   setshowpopup(false)
-                  let d={'id':'','case':0}
+                  let d={'id':'','case':1}
                   await getpageaction(d)
   
               }, 1500);
@@ -225,7 +226,7 @@ const Writelink = ({updateitem,status,getpageaction}) => {
            setshowpopup(true)
            setTimeout(async() => {
                setshowpopup(false)
-               let d={'id':'','case':0}
+               let d={'id':'','case':1}
                await getpageaction(d)
            }, 1500);
          
@@ -274,6 +275,7 @@ const Writelink = ({updateitem,status,getpageaction}) => {
   
     useEffect(() => {
       console.log('status for update',status)
+      setstatusset(status)
       if(status === true){
         console.log("updaye",updateitem)
         setTitle(updateitem?.title)
@@ -304,30 +306,21 @@ const Writelink = ({updateitem,status,getpageaction}) => {
            {loader &&  <LoadingSoS  /> }
               {showpopoup &&  <Popnotification  msg={showpopoupmsg} showpopoup={showpopoup} status={showpopoupstatus} /> }
         <div className="featured-photo-container">
-          {status === false ? 
-            <img
-              style={{ objectFit: 'cover' }}
-              src={featuredPhoto && URL.createObjectURL(featuredPhoto)}
-              alt="Featured"
-              className="featured-photo-preview"
-            />
-  
-         :
-         
-          featuredPhoto === ''?
-         
-             <img
-              style={{ objectFit: 'cover' }}
-              src={`${config.apiUrl}/${photourl}`}
-              alt="Featured"
-              className="featured-photo-preview"
-            /> : <img
-            style={{ objectFit: 'cover' }}
-            src={featuredPhoto && URL.createObjectURL(featuredPhoto)}
-            alt="Featured"
-            className="featured-photo-preview"
-          /> 
-       }
+      
+
+<img
+    style={{ objectFit: 'cover' }}
+    src={(featuredPhoto instanceof Blob || featuredPhoto instanceof File) ? 
+        URL.createObjectURL(featuredPhoto) :
+        (featuredPhoto !== '' && photourl === '') ? 
+            featuredPhoto :
+            (featuredPhoto === '' && photourl !== '') ? 
+                `${config.apiUrl}/${photourl}` :
+                ''
+    }
+    alt="Featured"
+    className="featured-photo-preview"
+/>
       
         </div>
         <form 

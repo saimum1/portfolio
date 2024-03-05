@@ -11,14 +11,18 @@ import companylogo from '../../assets/static/companylogo.svg'
 import {useAuth} from "../../Context/AuthInfo.jsx";
 import { useNavigate } from 'react-router-dom';
 import { global_css } from '../../GlobalCss/GlobalCSS.js';
+import axios from "axios";
+import config from "../../config.jsx";
 const Navabar = () => {
     const { userId , logout} = useAuth();
   const[clicked,setclicked]=useState(false)
+  const[resumelink,setresumelink]=useState('')
+  const[logourl,setlogourl]=useState('')
   const navigate = useNavigate();
 
   const redirectToPage = (e) => {
     // Redirect to '/another-page'
-    
+   
     navigate(`${e}`);
   };
 
@@ -28,10 +32,28 @@ const Navabar = () => {
   {'item':'Blog','route':'/'} ,
   {'item':'Resume','route':'/'}]
 
+  const getdata=async()=>{
+    try {
+      const response = await axios.get(`${config.apiUrl}/userdata/${1}`);
+      const data = await response.data;
+      console.log("sssasadafa",data)
+      // Check if data is found
+      if (data.id) {
+
+          setresumelink(data?.linkurlcv);
+          setlogourl(data?.logourl)
+      } else {
+          setresumelink('')
+      }
+  } catch (error) {
+      console.error('Error fetching data:', error);
+  }
+  }
 
     const [hasShadow, setHasShadow] = useState(false);
 
     useEffect(() => {
+      getdata()
       const handleScroll = () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (scrollTop > 0) {
@@ -61,7 +83,8 @@ const Navabar = () => {
                
                onClick={()=>redirectToPage('/')}
                >
-                   Logo
+             <img   src={`${config.apiUrl}/${logourl}`} style={{ height: '3rem', width: 'fit-content'}} alt="Featured" />
+
                </div>
             <div style={{flex:1,display : 'flex', gap : '8%', alignItems : 'center' ,justifyContent:'flex-end'}}>
   
@@ -71,6 +94,11 @@ const Navabar = () => {
                 
                 {itemlist?.map((i)=>{
                               return (
+
+                                <>
+                                  {i.item !== 'Resume'?
+                            
+                              
                                 <span  
                                 style={{cursor:'pointer',color:global_css.third_txt_color,fontWeight:'500'}}
                                 // className={style.texteffect}
@@ -78,8 +106,17 @@ const Navabar = () => {
                                 onMouseUp={(e)=>(e.currentTarget.style.color='#000')}
                                 onMouseEnter={(e)=>{(e.currentTarget.style.color='orangered');}}
                                 onMouseLeave={(e)=>{(e.currentTarget.style.color='#000');}}
-                                onClick={()=>redirectToPage(i.route)}
+                                 onClick={()=>redirectToPage(i.route)}
                                 >{i.item}</span>
+
+                                : <a href={resumelink} target='blank'> <span  
+                                style={{cursor:'pointer',color:global_css.third_txt_color,fontWeight:'500'}}
+                                onMouseDown={(e)=>{(e.currentTarget.style.color='red');}}
+                                onMouseUp={(e)=>(e.currentTarget.style.color='#000')}
+                                onMouseEnter={(e)=>{(e.currentTarget.style.color='orangered');}}
+                                onMouseLeave={(e)=>{(e.currentTarget.style.color='#000');}}
+                                >{i.item}</span> </a>}
+                                 </>
                               )
                             })}
             </div>
@@ -102,10 +139,25 @@ const Navabar = () => {
               .shadow {
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 background-color:white;
-                height:3.8rem;
+                height:3.5rem;
                 transition: all 400ms ;
 
-              }`}
+              }
+              
+              .boximage{
+                transition:all 500ms;
+              
+                
+              
+              }
+              .boximage:hover{
+                transform:scale(1.3);
+                transition:all 300ms;
+                box-shadow:1px 1px 15px #999990;
+                transition:all 500ms;
+              }
+              
+              `}
          </style>
         </div>
 

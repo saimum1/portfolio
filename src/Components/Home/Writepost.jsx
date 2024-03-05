@@ -6,6 +6,7 @@ import AlertBox from '../AlertBox/AlertBox.jsx';
 import { useDisclosure } from '@chakra-ui/react';
 import Popnotification from '../PopNotification/Popnotification.jsx';
 import LoadingSoS from '../LoadingScreen/LoadingSoS.jsx';
+import { ChromePicker } from 'react-color'; 
 const Writepost = ({updateitem,status,getpageaction}) => {
   const { isOpen : isAlertOpen, onOpen: onAlertOpen, onClose: onAlertClose } = useDisclosure()
   const [alertType, setAlertType] = useState('');
@@ -24,9 +25,12 @@ const Writepost = ({updateitem,status,getpageaction}) => {
   const [selected,setselected] = useState('false');
   const [id,setid]=useState('')
   const [photourl,setphotourl]=useState('')
-  const generateUniqueId = () => {
-    // Generate a unique ID
-    return '_' + Math.random().toString(36).substr(2, 9);
+  const [colorcode,setcolorcode]=useState('')
+  const[statusset,setstatusset]=useState('')
+  const [color, setColor] = useState('#666'); // Initial color is black
+
+  const handleChange = (newColor) => {
+    setColor(newColor.hex); // Update color state with selected color
   };
 
   const handleTitleChange = (event) => {
@@ -52,15 +56,15 @@ const Writepost = ({updateitem,status,getpageaction}) => {
   }
 
   const ondecision=(e)=>{
-e.preventDefault()
-   
-      if(status === true){
+// e.preventDefault()
+   console.log("asdasdadac",statusset)
+      if(statusset === true){
         onAlertOpen();
         setAlertType('warning');
         setAlertText('Are you sure you want to update the data?'); 
         setAlertButtonTextSecond('Cancel');
         setAlertButtonText('Yes, Update')
-      }else if(status === false){
+      }else if(statusset === false){
         onAlertOpen();
         setAlertType('success');
         setAlertText('Are you sure you want to save?'); 
@@ -72,7 +76,7 @@ e.preventDefault()
   }
 
   const handleSubmit =async() => {
-    if(status === false){
+    if(statusset === false){
     console.log("Featured photo in state:", featuredPhoto);
     // event.preventDefault();
     let formData = new FormData()
@@ -90,6 +94,7 @@ e.preventDefault()
         title,
         description,
         content,
+        color,
         featuredPhoto: await responsess?.data?.image_url, // Assuming the server returns some identifier for the uploaded photo
         created: new Date(),
         category: 'post',
@@ -145,7 +150,7 @@ await onAlertClose()
       throw error;
   }
 
-}else if(status === true){
+}else if(statusset === true){
   try {
 
             if(featuredPhoto === ''){
@@ -155,6 +160,7 @@ await onAlertClose()
               title,
               description,
               content,
+              color,
               featuredPhoto: photourl, 
               created: new Date(),
               category: 'post',
@@ -208,6 +214,7 @@ await onAlertClose()
               title,
               description,
               content,
+              color,
               featuredPhoto: await responses2?.data?.image_url, // Assuming the server returns some identifier for the uploaded photo
               created: new Date(),
               category: 'post',
@@ -227,28 +234,28 @@ await onAlertClose()
              await getpageaction(d)
          }, 1500);
        
-     }else if(responses.data.status === 500){
-               setshowpopupmsg('could not save')
-         setshowpopupstatus('failed')
-         setshowpopup(true)
-         setTimeout(() => {
-             setshowpopup(false)
+              }else if(responses.data.status === 500){
+                        setshowpopupmsg('could not save')
+                  setshowpopupstatus('failed')
+                  setshowpopup(true)
+                  setTimeout(() => {
+                      setshowpopup(false)
 
-         }, 1500);
+                  }, 1500);
 
-     }else{
-         setshowpopupmsg('no response from server')
-         setshowpopupstatus('failed')
-         setshowpopup(true)
-         setTimeout(() => {
-             setshowpopup(false)
+              }else{
+                  setshowpopupmsg('no response from server')
+                  setshowpopupstatus('failed')
+                  setshowpopup(true)
+                  setTimeout(() => {
+                      setshowpopup(false)
 
-         }, 1500);
+                  }, 1500);
 
-     }
-     await onAlertClose()
+              }
+              await onAlertClose()
 
-          }
+                    }
 
 } catch (error) {
     console.error('Error++++:', error);
@@ -272,6 +279,7 @@ await onAlertClose()
 
   useEffect(() => {
     console.log('status for update',status,updateitem)
+    setstatusset(status)
     if(status === true){
       console.log("updaye",updateitem)
       setTitle(updateitem?.title)
@@ -281,19 +289,19 @@ await onAlertClose()
       setphotourl(updateitem?.image_url)
       setselected(updateitem?.selected)
       setid(updateitem?.postid)
-
+      setColor(updateitem?.color !== null ? updateitem?.color:'#E6F2FA')
       
     }else if (status === false){
-      const iddd=generateUniqueId()
-      setid(iddd)
       setTitle('')
       setContent('')
       setDescription('')
       setFeaturedPhoto('')
       setselected(false)
       setid('')
+      setColor('#E6F2FA')
+
     }
-  }, [updateitem])
+  }, [])
   
 
   return (
@@ -302,36 +310,28 @@ await onAlertClose()
          {loader &&  <LoadingSoS  /> }
             {showpopoup &&  <Popnotification  msg={showpopoupmsg} showpopoup={showpopoup} status={showpopoupstatus} /> }
       <div className="featured-photo-container">
-   
-        {status === false ? 
-          <img
-            style={{ objectFit: 'cover' }}
-            src={featuredPhoto && URL.createObjectURL(featuredPhoto)}
-            alt="Featured"
-            className="featured-photo-preview"
-          />
 
-       :
+
+<img
+    style={{ objectFit: 'cover' }}
+    src={(featuredPhoto instanceof Blob || featuredPhoto instanceof File) ? 
+        URL.createObjectURL(featuredPhoto) :
+        (featuredPhoto !== '' && photourl === '') ? 
+            featuredPhoto :
+            (featuredPhoto === '' && photourl !== '') ? 
+                `${config.apiUrl}/${photourl}` :
+                ''
+    }
+    alt="Featured"
+    className="featured-photo-preview"
+/>
+
+
+                
+   
        
-        featuredPhoto === ''?
-       
-           <img
-            style={{ objectFit: 'cover' }}
-            src={`${config.apiUrl}/${photourl}`}
-            alt="Featured"
-            className="featured-photo-preview"
-          /> 
-          
-          : <img
-          style={{ objectFit: 'cover' }}
-          src={featuredPhoto && URL.createObjectURL(featuredPhoto)}
-          alt="Featured"
-          className="featured-photo-preview"
-        /> 
-     }
-    
       </div>
-      <form 
+      <div 
       // onSubmit={()=>ondecision()}
        className="blog-form">
         <div className="form-group">
@@ -364,7 +364,17 @@ await onAlertClose()
           />
         </div>
 
-        
+
+        <div className="form-group">
+          <label>Color Picker:</label>
+          <div style={{display:'flex',justifyContent:'flex-start',alignItems:'center',gap:"5%"}}>
+              <ChromePicker color={color && color} onChange={handleChange} />
+              <div style={{ marginTop: '20px' }}>
+                <label>Selected Color: {color && color || 'no color selected'}</label>
+                <div style={{ width: '150px', height: '10rem', backgroundColor: color }}></div>
+              </div>
+          </div>
+        </div>
 
         <div className="form-group">
           <label >Content:</label>
@@ -379,7 +389,7 @@ await onAlertClose()
       >
           Submit
         </button>
-      </form>
+      </div>
 
       <style jsx>
         {`

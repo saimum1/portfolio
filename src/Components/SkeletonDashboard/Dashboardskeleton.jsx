@@ -20,6 +20,7 @@ import UserList from '../Users/UserList/UserList.jsx'
 import OfferCenter from '../OfferCenter/OfferCenter.jsx'
 import Writepost from '../Home/Writepost.jsx'
 import Writelink from '../Home/Writelink.jsx'
+import EditHome from '../Home/EditHome.jsx'
 const Dashboardskeleton = () => {
 
     const { role } = useAuth();
@@ -47,26 +48,35 @@ const Dashboardskeleton = () => {
       seupdateitem(e.id)
 
         if(e.case === 0){
-        setshowcomponent(3)
 
           if(e.id !==''){
             seupdateitemstatus(true)
+             setshowcomponent(3)
+
           }else{
             seupdateitemstatus(false)
+            setshowcomponent(0)
+
           }
 
         } else if(e.case === 1){
-          setshowcomponent(4)
   
             if(e.id !==''){
               seupdateitemstatus(true)
+              setshowcomponent(4)
+
             }else{
               seupdateitemstatus(false)
+               setshowcomponent(1)
+
             }
   
+          }else{
+            seupdateitemstatus(false)
+            setshowcomponent(e.case)
           }
        
-     
+    
         
 
      }
@@ -88,6 +98,9 @@ const renderComponent = () => {
           return <Writepost updateitem={updateitem} status={updateitemstatus} getpageaction={getpageaction}/> ;
         case 4:
           return <Writelink updateitem={updateitem} status={updateitemstatus} getpageaction={getpageaction} />;
+
+          case 5:
+            return <EditHome updateitem={updateitem} status={updateitemstatus} getpageaction={getpageaction} />;  
      
 
       default:
@@ -114,7 +127,7 @@ const renderComponent = () => {
   return (
     <div   style={{height : '100vh', width:'100%', backgroundColor:global_css.primary_bg,display:'flex' ,justifyContent:'center',alignItems:'flex-start',paddingTop:'2px',overflow:'hidden'}}>
         
-            <div style={{flex:'16%' ,backgroundColor:global_css.primary_card_bg,height:'98.5%',width:'100%',display:"flex",justifyContent:'center',alignItems:'center',flexDirection:'column',paddingTop:'4.5rem'}}>
+            <div style={{flex:'12%' ,backgroundColor:global_css.primary_card_bg,height:'98.5%',width:'100%',display:"flex",justifyContent:'center',alignItems:'center',flexDirection:'column',paddingTop:'4.5rem'}}>
 
                 <div style={{flex:'55%',height:'100%',width:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'1rem',transition:'all 300ms',gap:'2px'}}>
 

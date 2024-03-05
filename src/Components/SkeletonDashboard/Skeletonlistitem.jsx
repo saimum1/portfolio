@@ -42,7 +42,12 @@ export const dataset=[
                                         'imgsec':offercentericongreen,
                                         'name':'Create Writing',
                                         'code':4
-                                            }, 
+                                            },   {
+                                                'img':datasetsicon,
+                                                'imgsec':datasetsicongreen,
+                                                'name':'Edit Home',
+                                                'code':5
+                                                    }, 
 
 
 ]

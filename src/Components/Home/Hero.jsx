@@ -42,19 +42,54 @@ const Hero = () => {
 
 
   const [data,setdata]=useState([])
-  const openpost=(e)=>{
-    console.log("eeee",e)
-    // window.location.href = `/postpage/${e}`
-    // return <Link to={`/postpage/${e}`} />;
-    return <Link to={`/postpage/${e}`} />; 
-  }
+  const [titlefirst, settitlefirst] = useState('');
+  const [titlesecond, settitlesecond] = useState('');
+  const [items, setItems] = useState([]);
+
+
 
   const getdata=async()=>{
-      
     const response = await axios.get(`${config.apiUrl}/getdatax`);
     console.log("showing ress hero",response?.data)
     setdata(response?.data)
   }
+
+
+
+  const gethomedata=async()=>{
+    // const responses = await axios.get(`${config.apiUrl}//userdata/${1}`);
+    //   console.log("showin dataa",responses)
+
+
+
+    try {
+      const response = await axios.get(`${config.apiUrl}/userdata/${1}`);
+     
+      const data = await response.data;
+      console.log("ssdafa",data?.id)
+      // Check if data is found
+      if (data.id) {
+          settitlefirst(data.titlefirst);
+          settitlesecond(data.titlesecond);
+          setItems(data.images.map(image => ({
+              imageprevurl: image.image_url,
+              imageUrl:'' ,
+              linkUrl: image.linkurlmedia
+          })));
+          setstatus(true)
+      } else {
+          // Handle case when xxdata is not found
+          settitlefirst('');
+          settitlesecond('');
+          setItems([]);
+          setstatus(false)
+      }
+  } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle error
+  }
+  }
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -63,6 +98,7 @@ const Hero = () => {
        // Use smooth scrolling behavior
     });
     getdata()
+    gethomedata()
   }, [])
 
 
@@ -75,14 +111,14 @@ const Hero = () => {
               <div style={{width:'70%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',marginTop:'4.5rem',background:''}}>
 
                   <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column'}}>
-                        <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-end'}}><span style={{fontSize:'7rem' ,fontWeight:'700',color:global_css.third_txt_color}}>I'M A PRODUCT</span></div>
+                        <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-end'}}><span style={{fontSize:'7rem' ,fontWeight:'700',color:global_css.third_txt_color}}>{titlefirst}  </span></div>
 
-
-
+                        {/* I'M A PRODUCT */}
+                        {/* DESIGNER */}
 
                       <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'space-between',alignItems:'center' ,marginRight:'30px' ,marginLeft:'30px'}}>
                         <div >
-                          <span style={{fontSize:'7rem' ,fontWeight:'700',color:global_css.third_txt_color}}>DESIGNER</span>
+                          <span style={{fontSize:'7rem' ,fontWeight:'700',color:global_css.third_txt_color}}>{titlesecond}</span>
                         </div>
 
                         <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',position:'relative'}}>
@@ -101,22 +137,26 @@ const Hero = () => {
                         </div>
 
                         <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',gap:"1rem"}}>
-                      
-                        <img src={behanceicon} /> 
-                          <img src={giticon} /> 
-                          <img src={linkedinicon} /> 
-                          <img src={sicon} /> 
+
+                        {items?.map((n)=>{
+                          return(
+                            <a href={n?.linkUrl}  target='blank'  >   <img className='imaghover' src={`${config.apiUrl}/${n.imageprevurl}`} style={{width:'24px',height:'24px'}} /> </a>
+                              
+
+                          )
+                        })}
 
                         </div>
                       </div>
                   </div>
 
                 <div style={{height:'4rem'}}></div>
+                <div style={{height:'4rem'}}></div>
 
                   <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',gap:'2rem'}}>
                         <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-start',flexDirection:'column',gap:'1rem'}}>
                           
-                          <span style={{color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2rem'}}> SELECTED WORK</span>
+                          <span style={{color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2.5rem'}}> SELECTED WORK</span>
                           <span style={{backgroundColor:'#6C757D',width:'100%',height:'1.5px'}}> </span>
 
                           </div>
@@ -140,7 +180,7 @@ const Hero = () => {
                                     </div>
 
                                     <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color, fontSize:'1.6rem', fontWeight: '600' }}>{value?.title}</span>
-                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
+                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400',textAlign:'justify' }}>{value?.description}</span>
                                 </div>
                                 </Link>
                             ))}
@@ -155,7 +195,7 @@ const Hero = () => {
                 <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',gap:'2rem'}}>
                         <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-start',flexDirection:'column',gap:'1rem'}}>
                           
-                          <span style={{  color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2rem'}}> WRITING</span>
+                          <span style={{  color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2.5rem'}}> WRITING</span>
                           <span style={{backgroundColor:'#6C757D',width:'100%',height:'1.5px'}}> </span>
                           </div>
 
@@ -195,7 +235,7 @@ const Hero = () => {
                           <div style={{width: '100%',height: '3rem',backgroundColor: '',color:"white"}}>
                           <div className="marquee-w">
                             <div className="marquee">
-                                <span>Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp;</span>
+                                <span style={{fontSize:'7rem',fontWeight:"600",margin:"8px 0px"}}>Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp;</span>
                               
                             </div>
                            
@@ -236,7 +276,7 @@ body::-webkit-scrollbar {
 
 body {
   -ms-overflow-style: none;
-  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-family: Inter;
 }
 
 /* Hide scrollbar for Firefox */
@@ -274,7 +314,7 @@ body {
   height: 100%;
   line-height: 140px;
   font-size: 4rem;
-  animation: marquee 9s linear infinite;
+  animation: marquee 12s linear infinite;
 }
 
 
@@ -297,6 +337,16 @@ body {
   transition:all 300ms;
   
 
+}
+
+
+.imaghover{
+  transition:all 300ms;
+}
+
+.imaghover:hover{
+  transform:scale(1.2);
+  transition:all 300ms;
 }
 
 .boximage{
