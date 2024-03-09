@@ -9,7 +9,7 @@ import italyimagesvg from '../Navbar/Image/IT.svg'
 import usaimagesvg from '../Navbar/Image/US.svg'
 import companylogo from '../../assets/static/companylogo.svg'
 import {useAuth} from "../../Context/AuthInfo.jsx";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { global_css } from '../../GlobalCss/GlobalCSS.js';
 import axios from "axios";
 import config from "../../config.jsx";
@@ -81,9 +81,10 @@ const Navabar = () => {
           
                <div style={{flex:1,display:'flex',justifyContent:'flex-start',alignItems:'center',cursor:'pointer'}}
                
-               onClick={()=>redirectToPage('/')}
+     
                >
-             <img   src={`${config.apiUrl}/${logourl}`} style={{ height: '3rem', width: 'fit-content'}} alt="Featured" />
+                  <Link to={`/`}>
+             <img   src={`${config.apiUrl}/${logourl}`} style={{ height: '3rem', width: 'fit-content'}} alt="Featured" /></Link>
 
                </div>
             <div style={{flex:1,display : 'flex', gap : '8%', alignItems : 'center' ,justifyContent:'flex-end'}}>

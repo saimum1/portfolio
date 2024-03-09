@@ -17,19 +17,15 @@ import {
 import {Button} from "@chakra-ui/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp, faEllipsisVertical} from "@fortawesome/free-solid-svg-icons";
-import {dataset} from "./dataset.jsx";
 import {useDisclosure} from "@chakra-ui/react";
-import AddOperator from "./AddOperator.jsx";
 
 import {global_css} from "../../GlobalCss/GlobalCSS.js";
 import axios from "axios";
 import config from "../../config.jsx";
 import toast from "react-hot-toast";
-import {removeItem} from "../SimList/simlistdataset.jsx";
 import Editopstions from "../EditFunctionality/Editopstions.jsx";
 import SearchDialouge from "../SearchComponent/SearchDialouge.jsx";
 import AlertBox from "../AlertBox/AlertBox.jsx";
-import Nodatafound from "../NoDataFound/Nodatafound.jsx";
 import LoadingSoS from "../LoadingScreen/LoadingSoS.jsx";
 import Popnotification from "../PopNotification/Popnotification.jsx";
 const InventoryTable = ({getpageaction,caseid}) => {

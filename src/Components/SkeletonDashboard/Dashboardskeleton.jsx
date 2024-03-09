@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react'
 import { global_css } from '../../GlobalCss/GlobalCSS'
-// import style from '../../GlobalCss/global.css'
 import LineIcon from '../../assets/static/Line.svg'
 import InventoryTable from '../InventoryTable/InventoryTable'
 import { dataset } from './Skeletonlistitem'
@@ -8,16 +7,9 @@ import Nodatafound from '../NoDataFound/Nodatafound'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp, faL } from '@fortawesome/free-solid-svg-icons'
 import LoadingSoS from '../LoadingScreen/LoadingSoS'
-import SimLis from '../SimList/SimLis'
-import SimRequest from '../SimRequest/SimRequest'
 import {useAuth} from "../../Context/AuthInfo.jsx";
 import axios from "axios";
 import config from "../../config.jsx";
-import GroupList from '../Users/GropuList/GroupList.jsx'
-import AgentListOperation from "../Users/AgentList/AgentListOperation.jsx";
-import AgentRequestList from "../Users/AgentRequest/AgentRequestList.jsx";
-import UserList from '../Users/UserList/UserList.jsx'
-import OfferCenter from '../OfferCenter/OfferCenter.jsx'
 import Writepost from '../Home/Writepost.jsx'
 import Writelink from '../Home/Writelink.jsx'
 import EditHome from '../Home/EditHome.jsx'
