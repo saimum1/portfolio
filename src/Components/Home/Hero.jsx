@@ -49,7 +49,11 @@ const Hero = () => {
 
 
   const getdata=async()=>{
-    const response = await axios.get(`${config.apiUrl}/getdatax`);
+    const response = await axios.get(`${config.apiUrl}/getdatax`,{
+      params:{
+        'userid':1
+      }
+    });
     console.log("showing ress hero",response?.data)
     setdata(response?.data)
   }

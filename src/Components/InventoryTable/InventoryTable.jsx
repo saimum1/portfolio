@@ -113,7 +113,11 @@ const InventoryTable = ({getpageaction,caseid}) => {
 
     const getdata=async()=>{
         setLoader(true)
-        const response = await axios.get(`${config.apiUrl}/getdatax`);
+        const response = await axios.get(`${config.apiUrl}/getdatax`,{
+            params:{
+              'userid':1
+            }
+          });
         console.log("showing ress",response?.data)
         setdata(response?.data)
          const slectedtrueiitem=response?.data?.filter((n)=>n.selected === 'true')
@@ -135,7 +139,7 @@ const InventoryTable = ({getpageaction,caseid}) => {
 
       const deleteitem=async(e)=>{
         console.log("deleted itemdd",e)
-        const responses = await axios.post(`${config.apiUrl}/delete_item`,{'id':e});
+        const responses = await axios.post(`${config.apiUrl}/delete_item`,{'id':e,'userid':1});
     
           console.log("ad",responses)
           if(responses.data.status === 200){
@@ -192,11 +196,11 @@ const InventoryTable = ({getpageaction,caseid}) => {
         }else{
 
      
-        const responses = await axios.post(`${config.apiUrl}/update_selected`,settleList);
-  
+        const responses = await axios.post(`${config.apiUrl}/update_selected`,{'settleList':settleList,'userid':1});
+   
         console.log("ad",responses)
         if(responses.data.status === 200){
-                 setshowpopupmsg('saved Success')
+                 setshowpopupmsg('saved Successfully')
             setshowpopupstatus('success')
             setshowpopup(true)
             setTimeout(() => {

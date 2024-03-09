@@ -45,7 +45,9 @@ const Projectpage = () => {
 
     const getdata=async()=>{
       
-      const response = await axios.get(`${config.apiUrl}/getdatax`);
+      const response = await axios.get(`${config.apiUrl}/getdatax`,{     params:{
+        'userid':1
+      }});
       console.log("showing ress hero",response?.data)
       setPost(response?.data);
     }
@@ -87,12 +89,12 @@ const Projectpage = () => {
   
   
                             
-                          <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem',transition:'all 300ms',cursor:'pointer'}}>
+                          <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem',transition:'all 300ms'}}>
                             {post?.filter((value)=> {return  value?.category === 'post'})?.map((value, index) => (
 
                                     <Link to={`/postpage/${value?.postid}`}>
                                     <div
-                                      key={index} style={{ background: '', height: '25rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem' }}>
+                                      key={index} style={{ background: '', height: '25rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem' ,cursor:'pointer'}}>
                                         
                                         <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                         

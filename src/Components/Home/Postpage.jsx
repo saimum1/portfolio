@@ -10,7 +10,11 @@ const Postpage = () => {
 
   const getdata=async()=>{
       
-    const response = await axios.get(`${config.apiUrl}/getdatax`);
+    const response = await axios.get(`${config.apiUrl}/getdatax`,{
+      params:{
+        'userid':1
+      }
+    });
     console.log("showing ress hero",response?.data)
     const selectedPost = response?.data?.find((p) => p.postid === postId);
     setPost(selectedPost);

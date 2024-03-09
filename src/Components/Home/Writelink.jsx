@@ -88,10 +88,13 @@ const Writelink = ({updateitem,status,getpageaction}) => {
   
         console.log("sdasdasdasd",responsess)
   
-        const newPost = {
+        const newPost = { 
+          userid:1,
           id,
           title,
           description,
+           color:'',
+
           content:linkurl,
           featuredPhoto: await responsess?.data?.image_url, // Assuming the server returns some identifier for the uploaded photo
           created: new Date(),
@@ -102,7 +105,7 @@ const Writelink = ({updateitem,status,getpageaction}) => {
         const responses = await axios.post(`${config.apiUrl}/getdata`, newPost);
         console.log('Response:', responses);
         if(responses.data.status === 200){
-          setshowpopupmsg('saved Success')
+          setshowpopupmsg('saved Successfully')
      setshowpopupstatus('success')
      setshowpopup(true)
      setTimeout(async() => {
@@ -154,6 +157,7 @@ const Writelink = ({updateitem,status,getpageaction}) => {
               if(featuredPhoto === ''){
                   console.log("heree")
               const newPost = {
+                userid:1,
                 id,
                 title,
                 description,
@@ -178,7 +182,7 @@ const Writelink = ({updateitem,status,getpageaction}) => {
   
               }, 1500);
           }else if(responses.data.status === 500){
-                    setshowpopupmsg('could not save')
+                    setshowpopupmsg('could not update')
               setshowpopupstatus('failed')
               setshowpopup(true)
               setTimeout(() => {
@@ -207,6 +211,7 @@ const Writelink = ({updateitem,status,getpageaction}) => {
   
               console.log("sdasdasdasd",responses2)
               const newPost = {
+                userid:1,
                 id,
                 title,
                 description,
@@ -231,7 +236,7 @@ const Writelink = ({updateitem,status,getpageaction}) => {
            }, 1500);
          
        }else if(responses.data.status === 500){
-                 setshowpopupmsg('could not save')
+                 setshowpopupmsg('could not update')
            setshowpopupstatus('failed')
            setshowpopup(true)
            setTimeout(() => {
