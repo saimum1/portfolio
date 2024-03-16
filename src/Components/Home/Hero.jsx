@@ -234,7 +234,7 @@ const Hero = () => {
 
 
               <div style={{backgroundColor:"#000000",display:"flex",height:"18rem" ,
-              width:'100%',justifyContent:'space-between',alignItems:'center',flexDirection:'column',paddingTop:'2rem' }} >
+              width:'100%',justifyContent:'space-between',alignItems:'center',flexDirection:'column',paddingTop:'2rem',marginTop:'12rem' }} >
                 
                           <div style={{width: '100%',height: '3rem',backgroundColor: '',color:"white"}}>
                           <div className="marquee-w">

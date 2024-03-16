@@ -15,18 +15,13 @@ import Writelink from '../Home/Writelink.jsx'
 import EditHome from '../Home/EditHome.jsx'
 const Dashboardskeleton = () => {
 
-    const { role } = useAuth();
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [selectedIndex, setselectedIndex] = useState(null);
     const[HoveredIndexInner,setHoveredIndexInner]= useState(null);
     const [selectedIndexOuter, setselectedIndexOuter] = useState(null);
     const [ordercount,setordercount]= useState('');
-
     const [showcomponent,setshowcomponent]=useState('')
     const [showcomponentouter,setshowcomponentouter]=useState('')
-
-    const agent_permission=['Sim request','SIM List','Dashboard','Sim Inventory','Settings']
-
     const [pageview,setpageview]=useState(true)
     const [isPageChanging,setIsPageChanging]=useState(false)
     const [updateitem,seupdateitem]=useState('')
@@ -123,7 +118,7 @@ const renderComponent = () => {
 
                 <div style={{flex:'55%',height:'100%',width:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'1rem',transition:'all 300ms',gap:'2px'}}>
 
-                        {dataset &&  dataset.filter((n) => role === 'AGENT' ? agent_permission.includes(n.name) : true).map((n,index)=>{
+                        {dataset &&  dataset?.map((n,index)=>{
                             console.log("index",index)
                             return(<div style={{display:'flex',flexDirection:'column',width:'85%'}}
                             >
@@ -135,16 +130,12 @@ const renderComponent = () => {
                                         >
                                           <span><img src={ (hoveredIndex === index || selectedIndex === index) ? n.imgsec : n.img}  style={{width:'100%',height:'100%'}}/></span>                         
                                         <span style={{color: (hoveredIndex === index || selectedIndex === index) ? '#27CF7A':global_css.primary_txt_color ,fontFamily:'Lexend',fontWeight:'400',fontSize:'100%',lineHeight:'24px'}}>{n.name}</span>
-                                        {/* {n.code ===1 || n.code ===4 ?
-                                      
-                                        <FontAwesomeIcon rotation={selectedIndex === index? 180:''} icon={faAngleUp}  style={{color:(hoveredIndex === index || selectedIndex === index)?'#27CF7A':'white',transition:'all 300ms'}}/>
-                                        :''} */}
                                       </div>
 
                                 
                                       {
                                       (n?.menu?.length>0)? 
-                                      n?.menu?.filter((n) => role === 'AGENT' ? agent_permission.includes(n) : true).map((i,innderindex)=>{
+                                      n?.menu?.map((i,innderindex)=>{
                                         return(
                                               <div  key={innderindex}
                                               style={{margin:(selectedIndex === index)? '2px 0px':'',width:'100%',height:(selectedIndex === index) ?'2.4rem':'0rem',display:'flex',justifyContent:'flex-start',alignItems:'center',gap:'10px',backgroundColor: (HoveredIndexInner === innderindex || selectedIndexOuter === innderindex) ? 'rgba(39, 207, 122, 0.10)' : '',paddingLeft:'30%',borderRadius:'6px',cursor:"pointer",transition:'all 300ms'}}
