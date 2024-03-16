@@ -6,6 +6,7 @@ import Hero from "../Components/Home/Hero.jsx";
 import Projectpage from "../Components/Home/Projectpage.jsx";
 import Postpage from "../Components/Home/Postpage.jsx";
 export const router = createBrowserRouter([
+    
     {
         path : '/',
         element : <Main></Main>,
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
                 <Hero/>
             
             },
+
             {
                 path : '/dashboard',
                 element : <Dashboardskeleton></Dashboardskeleton>
@@ -35,8 +37,9 @@ export const router = createBrowserRouter([
                 element : <InventoryTable></InventoryTable>
             },
 
-            ]}])
-
+            ]
+        
+        }])
 
 
 

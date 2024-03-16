@@ -8,6 +8,7 @@ import image1 from '../../assets/static/Image1.png'
 import image2 from '../../assets/static/Image2.png'
 import image3 from '../../assets/static/Image3.png'
 import image4 from '../../assets/static/s.svg'
+
 import axios from "axios";
 import { StatusOnlineIcon, SearchIcon } from "@heroicons/react/outline";
 import {
@@ -38,9 +39,10 @@ import Nodatafound from "../NoDataFound/Nodatafound.jsx";
 import LoadingSoS from "../LoadingScreen/LoadingSoS.jsx";
 import Popnotification from "../PopNotification/Popnotification.jsx";
 import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 const Hero = () => {
 
-
+  const navigate = useNavigate();
   const [data,setdata]=useState([])
   const [titlefirst, settitlefirst] = useState('');
   const [titlesecond, settitlesecond] = useState('');
@@ -95,6 +97,7 @@ const Hero = () => {
   }
 
   useEffect(() => {
+   
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -103,7 +106,27 @@ const Hero = () => {
     });
     getdata()
     gethomedata()
-  }, [])
+
+
+
+
+
+
+
+
+
+    const handleKeyDown = (event) => {
+      if (event.shiftKey && event.key === "D") {
+          navigate("/dashboard");
+      }
+  };
+
+  document.addEventListener("keydown", handleKeyDown);
+
+  return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+  };
+  }, [navigate])
 
 
 
