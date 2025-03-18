@@ -8,6 +8,7 @@ import image1 from '../../assets/static/Image1.png'
 import image2 from '../../assets/static/Image2.png'
 import image3 from '../../assets/static/Image3.png'
 import image4 from '../../assets/static/s.svg'
+import darkpr from '../../assets/static/darkpr.png'
 
 import axios from "axios";
 import { StatusOnlineIcon, SearchIcon } from "@heroicons/react/outline";
@@ -137,67 +138,128 @@ const Hero = () => {
 
               <div style={{width:'70%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',marginTop:'4.5rem',background:''}}>
 
-                  <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column'}}>
-                        <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-end'}}><span style={{fontSize:'7rem' ,fontWeight:'700',color:global_css.third_txt_color}}>{titlefirst}  </span></div>
 
-                        {/* I'M A PRODUCT */}
-                        {/* DESIGNER */}
-
-                      <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'space-between',alignItems:'center' ,marginRight:'30px' ,marginLeft:'30px'}}>
-                        <div >
-                          <span style={{fontSize:'7rem' ,fontWeight:'700',color:global_css.third_txt_color}}>{titlesecond}</span>
-                        </div>
-
-                        <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',position:'relative'}}>
-                          <div style={{background:''}}>
-                             <img src={boxicon} style={{height:'auto',width:'auto'}}/> 
-
-                          
-                             
-                             
-                             </div>  
-                          <div style={{position:'absolute',bottom:'-28%',right:'-10%',display:'flex',justifyContent:'flex-start',alignItems:'flex-start',flexDirection:'column',transform:'rotate(-15deg)',letterSpacing:'-0.8px',fontWeight:'400',fontStyle:'normal',lineHeight:'28px',textAlign:'left',width:'50%',background:'',color:'#999999'}}>
-                            <span style={{float:'left',display:'flex',justifyContent:'flex-start'}}>PASSIONATE ABOUT</span>
-                            <span style={{float:'left',display:'flex',justifyContent:'flex-start'}}>COLLABORATION</span>
-                            <span style={{float:'left',display:'flex',justifyContent:'flex-start'}}>CLOUD & UX.</span>
-                          </div>
-                        </div>
-
-                        <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',gap:"1rem"}}>
-
-                        {items?.map((n)=>{
-                          return(
-                            <a href={n?.linkUrl}  target='blank'  >   <img className='imaghover' src={`${config.apiUrl}/${n.imageprevurl}`} style={{width:'24px',height:'24px'}} /> </a>
-                              
-
-                          )
-                        })}
-
-                        </div>
-                      </div>
+                <div style={{
+                  width: '100%',
+                  height: '100%', 
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  boxSizing: 'border-box',
+                  fontFamily: 'Arial, sans-serif',
+                  borderRadius: '20px', 
+                  paddingTop:'5rem'
+                }}>
+             
+                  <div style={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center', 
+                    alignItems: 'flex-start',
+                    color: '#6C757D',
+                  }}>
+                    <p style={{
+                      fontSize: '24px', 
+                      margin: '0 0 10px 0', 
+                      fontWeight: '300',
+                    }}>
+                      I'm
+                    </p>
+                    <p style={{
+                      fontSize: '48px', 
+                      margin: '0 0 10px 0',
+                      fontWeight: '700',
+                      letterSpacing: '2px',
+                      textTransform: 'uppercase',
+                    }}>
+                      Rakibul Hassan Saimum
+                    </p>
+                    <p style={{
+                      fontSize: '24px', // Job title size
+                      margin: '0 0 20px 0',
+                      fontWeight: '400',
+                      opacity: '0.9', // Slightly faded for hierarchy
+                    }}>
+                      Software Engineer
+                    </p>
+                    <div style={{
+                      display: 'flex',
+                      gap: '15px', // Gap between buttons
+                    }}>
+                      <span style={{
+                        backgroundColor: '#fff', // White button background like in the image
+                        color: '#ff4d4d', // Red text to match the theme
+                        padding: '10px 20px',
+                        borderRadius: '25px', // Rounded buttons
+                        fontSize: '16px',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        boxShadow: '0 5px 10px rgba(0, 0, 0, 0.1)', // Subtle shadow for buttons
+                        transition: 'transform 0.2s', // Smooth hover effect
+                      }}>
+                        Hire Me
+                      </span>
+                      <span style={{
+                        backgroundColor: '#fff',
+                        color: '#ff4d4d',
+                        padding: '10px 20px',
+                        borderRadius: '25px',
+                        fontSize: '16px',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        boxShadow: '0 5px 10px rgba(0, 0, 0, 0.1)',
+                        transition: 'transform 0.2s',
+                      }}>
+                        Contact Me
+                      </span>
+                    </div>
                   </div>
 
+
+                  {/* Right Section: Image */}
+                  <div style={{
+                    flex: 1,
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    alignItems: 'flex-start',
+                    
+                  }}>
+
+
+   
+     
+                    <img
+                      src={darkpr}
+                      alt="Profile"
+                      style={{
+                        width: '75%', 
+                        height: 'auto',
+                        borderTopLeftRadius: '50%', 
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </div>
+
+               
+
+                </div>
+
                 <div style={{height:'4rem'}}></div>
                 <div style={{height:'4rem'}}></div>
 
-                  <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',gap:'2rem'}}>
+                  <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',gap:'2rem',marginTop:'5%'}}>
                         <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-start',flexDirection:'column',gap:'1rem'}}>
-                          
-                          <span style={{color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2.5rem'}}> SELECTED WORK</span>
-                          <span style={{backgroundColor:'#6C757D',width:'100%',height:'1.5px'}}> </span>
-
+                            <span style={{color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2.5rem'}}> SELECTED WORK</span>
+                            <span style={{backgroundColor:'#6C757D',width:'100%',height:'1.5px'}}> </span>
                           </div>
 
-
-                     
-
-                          
                         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem',transition:'all 300ms',cursor:'pointer'}}>
                          {data?.filter((value)=> {return value?.selected === 'true' && value?.category === 'post'})?.map((value, index) => (
                                
                                <Link to={`/postpage/${value?.postid}`}>
                                <div
-                                  key={index} style={{ background: '', height: '25rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem' }}>
+                                  key={index} style={{ height: '28rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0rem',padding:'1rem',borderRadius:'.5rem' }}>
                                    
                                    <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                    
@@ -206,8 +268,8 @@ const Hero = () => {
                                         </div>
                                     </div>
 
-                                    <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color, fontSize:'1.6rem', fontWeight: '600' }}>{value?.title}</span>
-                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400',textAlign:'justify' }}>{value?.description}</span>
+                                    <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color, fontSize:'1.6rem', fontWeight: '600',fontFamily:'ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji' }}>{value?.title}</span>
+                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400',textAlign:'justify',fontFamily:'ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji' }}>{value?.description}</span>
                                 </div>
                                 </Link>
                             ))}
@@ -231,9 +293,9 @@ const Hero = () => {
 
                           <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem',transition:'all 300ms'}}>
                          {data?.filter((value)=> {return value?.selected === 'true' && value?.category === 'write'})?.map((value, index) => (
-                          <a href={value?.content} target='blank'>
+                              <a href={value?.content} target='blank'>
                                 <div 
-                                 key={index} style={{ background: '', height: '20rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem',cursor:'pointer' }}>
+                                 key={index} style={{  height: '20rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem',cursor:'pointer',padding:'1rem',borderRadius:'.5rem' }}>
 
                               <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                    
@@ -241,14 +303,20 @@ const Hero = () => {
                                        <img className='boximage'  src={`${config.apiUrl}/${value?.image_url}`} style={{ height: '12rem', width: '100%'}} alt="Featured" />
                                    </div>
                                </div>
-                                    <span style={{ flex: 1, height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color,fontSize:'1.6rem', fontWeight: '600' }}>{value?.title}</span>
-                                    <span style={{ flex: 2,  height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' }}>{value?.description}</span>
+                                    <span style={{ flex: 1, height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color,fontSize:'1.6rem', fontWeight: '600',fontFamily:'ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji' }}>{value?.title}</span>
+                                    <span style={{ flex: 2,  height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' ,fontFamily:'ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji'}}>{value?.description}</span>
                                 </div>
 
                                 </a>
                             ))}
                         </div>
-                  </div>
+                </div>
+
+
+
+
+                <div style={{height:'4rem'}}></div>
+                <div style={{height:'4rem'}}></div>
 
               </div>
 
@@ -256,41 +324,7 @@ const Hero = () => {
 
 
 
-              <div style={{backgroundColor:"#000000",display:"flex",height:"18rem" ,
-              width:'100%',justifyContent:'space-between',alignItems:'center',flexDirection:'column',paddingTop:'2rem',marginTop:'12rem' }} >
-                
-                          <div style={{width: '100%',height: '3rem',backgroundColor: '',color:"white"}}>
-                          <div className="marquee-w">
-                            <div className="marquee">
-                                <span style={{fontSize:'7rem',fontWeight:"600",margin:"8px 0px"}}>Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp;</span>
-                              
-                            </div>
-                           
-                        </div>
-                        </div>
-
-                    
-                        <div style={{height:'100%',width:'90%',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                          <div style={{flex:1,display:'flex',justifyContent:'center',alignItems:'flex-start',flexDirection:'column',color:'white',width:'100%',height:'100%',textAlign:'justify',float:'left',fontWeight:'400',fontFamily:'Inter',lineHeight:'30px'}}>
-                            <span style={{float:'left',backgroundColor:''}}>Open to explore various opportunities and </span>
-                                <span style={{float:'left',backgroundColor:''}}>collaborations</span>
-                          </div>
-
-                          <div style={{flex:1}}>
-                            <span>
-                              <button 
-                              onMouseDown={(e)=>(e.currentTarget.style.backgroundColor = '#1e0791')}
-                              onMouseUp={(e)=>(e.currentTarget.style.backgroundColor = '#5033D7')}    
-                              style={{backgroundColor:'#5033D7',display:'flex',
-                              justifyContent:'center',alignItems:'center',border:'1px solid var(--White, #FFF)',
-                              borderRadius:'4px',padding:'12px 24px',color:'var(--White, #FFF)',width:'40%',cursor:'pointer'}}>Let’s Talk</button>
-                            </span>
-                          </div>
-
-                        </div>
-                    
-
-              </div>
+             
 
            <style jsx>
             {`

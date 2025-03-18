@@ -172,7 +172,6 @@ const InventoryTable = ({getpageaction,caseid}) => {
 
 
     useEffect(() => {
-
         getdata()
     }, []);
 
@@ -181,19 +180,12 @@ const InventoryTable = ({getpageaction,caseid}) => {
 
 
     const UpdateBulk = async () => {
-
-
- 
         console.log("asdasdasdas",settleList)
         if(alertType === 'delete'){
                 console.log("postid",selecteditem?.postid)
             deleteitem(selecteditem?.postid)
-
         }else{
-
-     
         const responses = await axios.post(`${config.apiUrl}/update_selected`,{'settleList':settleList,'userid':1});
-   
         console.log("ad",responses)
         if(responses.data.status === 200){
                  setshowpopupmsg('saved Successfully')
@@ -201,7 +193,6 @@ const InventoryTable = ({getpageaction,caseid}) => {
             setshowpopup(true)
             setTimeout(() => {
                 setshowpopup(false)
-
             }, 1500);
           getdata()
         }else if(responses.data.status === 500){

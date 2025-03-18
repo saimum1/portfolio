@@ -1,13 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { Select, SelectItem } from "@tremor/react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCaretDown, faCaretUp, faChevronDown, faL} from "@fortawesome/free-solid-svg-icons";
-import usa from '../../assets/static/usa.png'
-import Avatar from "../Avatar.jsx";
-import { data } from 'autoprefixer';
-import italyimagesvg from '../Navbar/Image/IT.svg'
-import usaimagesvg from '../Navbar/Image/US.svg'
-import companylogo from '../../assets/static/companylogo.svg'
+import logo from '../../assets/static/logox.svg'
 import {useAuth} from "../../Context/AuthInfo.jsx";
 import { Link, useNavigate } from 'react-router-dom';
 import { global_css } from '../../GlobalCss/GlobalCSS.js';
@@ -21,13 +13,11 @@ const Navabar = () => {
   const navigate = useNavigate();
 
   const redirectToPage = (e) => {
-    // Redirect to '/another-page'
-   
     navigate(`${e}`);
   };
 
    
-  const itemlist=[{'item':'About','route':'/'},
+  const itemlist=[
   {'item':'Projects','route':'/projects'} ,
   {'item':'Blog','route':'/'} ,
   {'item':'Resume','route':'/'}]
@@ -37,9 +27,7 @@ const Navabar = () => {
       const response = await axios.get(`${config.apiUrl}/userdata/${1}`);
       const data = await response.data;
       console.log("sssasadafa",data)
-      // Check if data is found
       if (data.id) {
-
           setresumelink(data?.linkurlcv);
           setlogourl(data?.logourl)
       } else {
@@ -84,15 +72,22 @@ const Navabar = () => {
      
                >
                   <Link to={`/`}>
-             <img   src={`${config.apiUrl}/${logourl}`} style={{ height: '3rem', width: 'fit-content'}} alt="Featured" /></Link>
+                     <p style={{
+                                fontSize: '1.5rem',
+                                lineHeight: '1.25rem',
+                                fontWeight: '700',
+                                letterSpacing: '2px',
+                                textTransform: 'uppercase',
+                                width:"8rem"
+                              }}>
+                              
+                                    <img src={logo}/>
+                                 
+                              </p>
+                  </Link>
 
                </div>
             <div style={{flex:1,display : 'flex', gap : '8%', alignItems : 'center' ,justifyContent:'flex-end'}}>
-  
-                
-
-             
-                
                 {itemlist?.map((i)=>{
                               return (
 
@@ -139,9 +134,12 @@ const Navabar = () => {
               
               .shadow {
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                background-color:white;
+                // background-color:white;
                 height:3.5rem;
                 transition: all 400ms ;
+                --tw-backdrop-blur: blur(8px);
+               backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+
 
               }
               
@@ -157,7 +155,10 @@ const Navabar = () => {
                 box-shadow:1px 1px 15px #999990;
                 transition:all 500ms;
               }
-              
+
+            
+
+
               `}
          </style>
         </div>

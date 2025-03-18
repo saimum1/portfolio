@@ -54,57 +54,19 @@ const Postpage = () => {
   
                 </div> 
 
-                <div style={{width:'70%',textAlign:'justify' ,display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',background:''}}>
+                <div style={{width:'70%',height:"100%",textAlign:'justify' ,display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',background:''}}>
   
                   
   
   
   
-               <div dangerouslySetInnerHTML={{ __html: post?.content }} />
+                <div dangerouslySetInnerHTML={{ __html: post?.content }} style={{height:"100%"}} />
   
-                
   
                 </div> 
-  
-  
-  
-         
-  
-                <div style={{backgroundColor:"#000000",display:"flex",height:"18rem" ,
-                width:'100%',justifyContent:'space-between',alignItems:'center',flexDirection:'column',paddingTop:'2rem' }} >
-                  
-                            <div style={{width: '100%',height: '3rem',backgroundColor: '',color:"white"}}>
-                            <div className="marquee-w">
-                              <div className="marquee">
-                                  <span>Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp; Let's talk &nbsp;</span>
-                                
-                              </div>
-                             
-                          </div>
-                          </div>
-  
-                      
-                          <div style={{height:'100%',width:'90%',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                            <div style={{flex:1,display:'flex',justifyContent:'center',alignItems:'flex-start',flexDirection:'column',color:'white',width:'100%',height:'100%',textAlign:'justify',float:'left',fontWeight:'400',fontFamily:'Inter',lineHeight:'30px'}}>
-                              <span style={{float:'left',backgroundColor:''}}>Open to explore various opportunities and </span>
-                                  <span style={{float:'left',backgroundColor:''}}>collaborations</span>
-                            </div>
-  
-                            <div style={{flex:1}}>
-                              <span>
-                                <button 
-                                onMouseDown={(e)=>(e.currentTarget.style.backgroundColor = '#1e0791')}
-                                onMouseUp={(e)=>(e.currentTarget.style.backgroundColor = '#5033D7')}    
-                                style={{backgroundColor:'#5033D7',display:'flex',
-                                justifyContent:'center',alignItems:'center',border:'1px solid var(--White, #FFF)',
-                                borderRadius:'4px',padding:'12px 24px',color:'var(--White, #FFF)',width:'40%',cursor:'pointer'}}>Let’s Talk</button>
-                              </span>
-                            </div>
-  
-                          </div>
-                      
-  
-                </div>
+
+                <div style={{height:'4rem'}}></div>
+                <div style={{height:'4rem'}}></div>
   
              <style jsx>
               {`
