@@ -24,15 +24,13 @@ const Navabar = () => {
 
   const getdata=async()=>{
     try {
-      const response = await axios.get(`${config.apiUrl}/userdata/${1}`);
+      const response = await axios.get(`${config.apiUrl}/userdata`);
       const data = await response.data;
       console.log("sssasadafa",data)
-      if (data.id) {
-          setresumelink(data?.linkurlcv);
-          setlogourl(data?.logourl)
-      } else {
-          setresumelink('')
-      }
+      if (data) {
+          setresumelink(data?.profile[0]?.linkurlcv);
+          setlogourl(data?.profile[0]?.logourl)
+      } 
   } catch (error) {
       console.error('Error fetching data:', error);
   }
@@ -81,7 +79,7 @@ const Navabar = () => {
                                 width:"8rem"
                               }}>
                               
-                                    <img src={logo}/>
+                                    <img src={`${config.apiUrl}/${logourl && logourl}`}  alt='logo'/>
                                  
                               </p>
                   </Link>

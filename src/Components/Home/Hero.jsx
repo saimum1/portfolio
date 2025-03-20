@@ -63,39 +63,7 @@ const Hero = () => {
 
 
 
-  const gethomedata=async()=>{
-    // const responses = await axios.get(`${config.apiUrl}//userdata/${1}`);
-    //   console.log("showin dataa",responses)
-
-
-
-    try {
-      const response = await axios.get(`${config.apiUrl}/userdata/${1}`);
-     
-      const data = await response.data;
-      console.log("ssdafa",data?.id)
-      // Check if data is found
-      if (data.id) {
-          settitlefirst(data.titlefirst);
-          settitlesecond(data.titlesecond);
-          setItems(data.images.map(image => ({
-              imageprevurl: image.image_url,
-              imageUrl:'' ,
-              linkUrl: image.linkurlmedia
-          })));
-          setstatus(true)
-      } else {
-          // Handle case when xxdata is not found
-          settitlefirst('');
-          settitlesecond('');
-          setItems([]);
-          setstatus(false)
-      }
-  } catch (error) {
-      console.error('Error fetching data:', error);
-      // Handle error
-  }
-  }
+  
 
   useEffect(() => {
    
@@ -106,7 +74,6 @@ const Hero = () => {
        // Use smooth scrolling behavior
     });
     getdata()
-    gethomedata()
 
 
 

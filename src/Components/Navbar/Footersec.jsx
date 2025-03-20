@@ -1,7 +1,32 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import logo from '../../../src/assets/static/logox.svg'
+import axios from "axios";
+import config from "../../config.jsx";
+
 const Footersec = () => {
+  const [items, setItems] = useState([]);
+  const[logourl,setlogourl]=useState('') 
+
+
+  const gethomedata=async()=>{
+    try {
+      const response = await axios.get(`${config.apiUrl}/userdata`);
+      const data = await response.data;
+      console.log("sssasadafa3245yu",data?.media)
+      if (data) {
+          setlogourl(data?.profile[0]?.logourl)
+          setItems(data?.media)
+      } 
+  } catch (error) {
+      console.error('Error fetching data:', error);
+  }
+  }
+
+  useEffect(() => {
+    gethomedata()
+  }, [])
+  
   return (
     <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column'}}>
 
@@ -36,7 +61,9 @@ const Footersec = () => {
             width:"8rem"
           }}>
           
-                <img src={logo}/>
+                {/* <img src={logo}/> */}
+                <img src={`${config.apiUrl}/${logourl && logourl}`}  alt='logo'/>
+
              
           </p>
           <p style={{
@@ -72,10 +99,12 @@ const Footersec = () => {
        
 
 
-            <a href='https://www.linkedin.com/in/rakibul-hassan-saimum-2452a8147/' target='blank'> <i class="fa-brands fa-linkedin"></i></a> 
-            <a href='https://x.com/XSaimumX' target='blank' >  <i class="fa-brands fa-square-x-twitter" ></i></a>
-            <a href='https://medium.com/@gsaimum' target='blank' > <i class="fa-solid fa-m" ></i></a>
-            <a href='https://github.com/saimum1?tab=repositories' target='blank' >  <i class="fa-brands fa-github" ></i></a>
+            {items?.map((n)=>{
+              return(
+                <a href={n.linkurlmedia} target='blank'>
+                   <img src={`${config.apiUrl}/${n?.image_url}`} style={{width:"30px",height:"30px"}}/></a> 
+              )
+            })}
         
         </div>
       </div>

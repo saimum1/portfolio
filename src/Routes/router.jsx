@@ -20,10 +20,10 @@ export const router = createBrowserRouter([
             
             },
 
-            {
-                path : '/dashboard',
-                element : <Dashboardskeleton></Dashboardskeleton>
-            },
+            // {
+            //     path : '/dashboard',
+            //     element : <Dashboardskeleton></Dashboardskeleton>
+            // },
             {
                 path : '/projects',
                 element :<Projectpage/>,
@@ -32,10 +32,10 @@ export const router = createBrowserRouter([
                 path : '/postpage/:postId',
                 element :<Postpage/>
             },
-            {
-                path : '/inventory',
-                element : <InventoryTable></InventoryTable>
-            },
+            // {
+            //     path : '/inventory',
+            //     element : <InventoryTable></InventoryTable>
+            // },
 
             ]
         
