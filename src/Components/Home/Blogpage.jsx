@@ -1,12 +1,12 @@
+
 import React,{useState,useEffect} from 'react'
 import axios from "axios";
 import config from "../../config.jsx";
 import { Link } from 'react-router-dom';
+import { global_css } from '../../GlobalCss/GlobalCSS.js';
 
-const Projectpage = () => { 
+const Blogpage = () => { 
   const [post, setPost] = useState(null);
-    const itemlist=['About' ,'Projects' ,'Blog' ,'Resume']
-
 
     const getdata=async()=>{
       
@@ -27,10 +27,6 @@ const Projectpage = () => {
      
     }, []);
   
-    const openpost=(e)=>{
-      console.log("eeee",e)
-      window.location.href = `/postpage/${e}`
-    }
     return (
       <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column'}}>
              
@@ -38,31 +34,34 @@ const Projectpage = () => {
               <div style={{width:'70%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',marginTop:'4.5rem',background:''}}>
   
                   
-              <div style={{height:'2rem'}}></div>
+  
+                  <div style={{height:'2rem'}}></div>
+  
                     <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',gap:'2rem'}}>
                           <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-start',flexDirection:'column',gap:'1rem'}}>
-                            
+                           
+                       
                             </div>
-                          <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem',transition:'all 300ms'}}>
-                            {post?.filter((value)=> {return  value?.category === 'post'})?.map((value, index) => (
 
-                                    <Link to={`/postpage/${value?.postid}`}>
-                                    <div
-                                      key={index} style={{ background: '', height: '25rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem' ,cursor:'pointer'}}>
-                                        
-                                        <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
-                                        
-                                            <div  className='box' style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%',borderRadius:'5px',border:'1px solid #999999' }}>
-                                                <img className='boximage'  src={`${config.apiUrl}/${value?.image_url}`} style={{ height: '17rem', width: '100%'}} alt="Featured" />
-                                            </div>
-                                        </div>
+                          <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem',transition:'all 300ms'}}>
+                         {post?.filter((value)=> {return  value?.category === 'write'})?.map((value, index) => (
+                              <a href={value?.content} target='blank'>
+                                <div 
+                                 key={index} style={{  height: '20rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0.6rem',cursor:'pointer',padding:'1rem',borderRadius:'.5rem' }}>
 
-                                        <span style={{ fontFamily:'ui-sans-serif',flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%', color: '#000', fontFamily: 'Inter', fontSize: '2rem', fontWeight: '700' }}>{value?.title}</span>
-                                        <span style={{ fontFamily:'ui-sans-serif',flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' ,textAlign:'justify'}}>{value?.description}</span>
-                                    </div>
-                                    </Link>
+                              <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
+                                   
+                                   <div  className='box' style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%',borderRadius:'5px',border:'1px solid #999999' }}>
+                                       <img className='boximage'  src={`${config.apiUrl}/${value?.image_url}`} style={{ height: '12rem', width: '100%'}} alt="Featured" />
+                                   </div>
+                               </div>
+                                    <span style={{ flex: 1, height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color,fontSize:'1.6rem', fontWeight: '600',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
+                                    <span style={{ flex: 2,  height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' ,fontFamily:'ui-sans-serif'}}>{value?.description}</span>
+                                </div>
+
+                                </a>
                             ))}
-                          </div>
+                        </div>
                     </div>
   
                   
@@ -159,4 +158,4 @@ const Projectpage = () => {
   }
   
 
-export default Projectpage
+export default Blogpage

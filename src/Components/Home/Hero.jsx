@@ -9,6 +9,7 @@ import image2 from '../../assets/static/Image2.png'
 import image3 from '../../assets/static/Image3.png'
 import image4 from '../../assets/static/s.svg'
 import darkpr from '../../assets/static/darkpr.png'
+import pcs from '../../assets/static/px.png'
 
 import axios from "axios";
 import { StatusOnlineIcon, SearchIcon } from "@heroicons/react/outline";
@@ -144,13 +145,14 @@ const Hero = () => {
                     </p>
                     <p style={{
                       fontSize: '24px', // Job title size
-                      margin: '0 0 20px 0',
+                      margin: '0 0 10px 0',
                       fontWeight: '400',
                       opacity: '0.9', // Slightly faded for hierarchy
                     }}>
                       Software Engineer
                     </p>
                     <div style={{
+                      margin: '0 0 10px 0',
                       display: 'flex',
                       gap: '15px', // Gap between buttons
                     }}>
@@ -197,10 +199,10 @@ const Hero = () => {
    
      
                     <img
-                      src={darkpr}
+                      src={pcs}
                       alt="Profile"
                       style={{
-                        width: '75%', 
+                        width: '50%', 
                         height: 'auto',
                         borderTopLeftRadius: '50%', 
                         objectFit: 'cover',
@@ -235,8 +237,8 @@ const Hero = () => {
                                         </div>
                                     </div>
 
-                                    <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color, fontSize:'1.6rem', fontWeight: '600',fontFamily:'ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji' }}>{value?.title}</span>
-                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400',textAlign:'justify',fontFamily:'ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji' }}>{value?.description}</span>
+                                    <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color, fontSize:'1.6rem', fontWeight: '600',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
+                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400',textAlign:'justify',fontFamily:'ui-sans-serif' }}>{value?.description}</span>
                                 </div>
                                 </Link>
                             ))}
@@ -270,8 +272,8 @@ const Hero = () => {
                                        <img className='boximage'  src={`${config.apiUrl}/${value?.image_url}`} style={{ height: '12rem', width: '100%'}} alt="Featured" />
                                    </div>
                                </div>
-                                    <span style={{ flex: 1, height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color,fontSize:'1.6rem', fontWeight: '600',fontFamily:'ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji' }}>{value?.title}</span>
-                                    <span style={{ flex: 2,  height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' ,fontFamily:'ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji'}}>{value?.description}</span>
+                                    <span style={{ flex: 1, height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color,fontSize:'1.6rem', fontWeight: '600',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
+                                    <span style={{ flex: 2,  height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' ,fontFamily:'ui-sans-serif'}}>{value?.description}</span>
                                 </div>
 
                                 </a>

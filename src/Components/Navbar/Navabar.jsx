@@ -8,18 +8,25 @@ import config from "../../config.jsx";
 const Navabar = () => {
     const { userId , logout} = useAuth();
   const[clicked,setclicked]=useState(false)
+  const[clickeditem,setclickeditem]=useState('')
   const[resumelink,setresumelink]=useState('')
   const[logourl,setlogourl]=useState('')
   const navigate = useNavigate();
 
-  const redirectToPage = (e) => {
+
+
+
+
+  const redirectToPage = (i,e) => {
+    console.log("cada",i)
+    setclickeditem(i)
     navigate(`${e}`);
   };
 
    
   const itemlist=[
   {'item':'Projects','route':'/projects'} ,
-  {'item':'Blog','route':'/'} ,
+  {'item':'Blog','route':'/blogs'} ,
   {'item':'Resume','route':'/'}]
 
   const getdata=async()=>{
@@ -76,7 +83,8 @@ const Navabar = () => {
                                 fontWeight: '700',
                                 letterSpacing: '2px',
                                 textTransform: 'uppercase',
-                                width:"8rem"
+                                transition:'all 600ms',
+                                width:`${hasShadow ? '6rem' : '8rem'}`
                               }}>
                               
                                     <img src={`${config.apiUrl}/${logourl && logourl}`}  alt='logo'/>
@@ -85,7 +93,7 @@ const Navabar = () => {
                   </Link>
 
                </div>
-            <div style={{flex:1,display : 'flex', gap : '8%', alignItems : 'center' ,justifyContent:'flex-end'}}>
+             <div style={{flex:1,display : 'flex', gap : '3%', alignItems : 'center' ,justifyContent:'flex-end',color:'#7A8389'}}>
                 {itemlist?.map((i)=>{
                               return (
 
@@ -94,26 +102,44 @@ const Navabar = () => {
                             
                               
                                 <span  
-                                style={{cursor:'pointer',color:global_css.third_txt_color,fontWeight:'500'}}
-                                // className={style.texteffect}
-                                onMouseDown={(e)=>{(e.currentTarget.style.color='red');}}
-                                onMouseUp={(e)=>(e.currentTarget.style.color='#000')}
-                                onMouseEnter={(e)=>{(e.currentTarget.style.color='orangered');}}
-                                onMouseLeave={(e)=>{(e.currentTarget.style.color='#000');}}
-                                 onClick={()=>redirectToPage(i.route)}
+                                style={{cursor:'pointer',color:global_css.third_txt_color,fontWeight:'500',
+                                  color: global_css.third_txt_color,
+                                  padding: '8px 16px',
+                                  borderRadius: '20px',
+                                  transition:"all 400ms",
+                                  backgroundColor:`${clickeditem === i.item ? '#f7deea':'transparent'}`
+                                }}
+                                
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.backgroundColor = '#f7deea';
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.backgroundColor = `${clickeditem === i.item ? '#f7deea':'transparent'}`;
+                                }}
+                                 onClick={()=>redirectToPage(i.item,i.route)}
                                 >{i.item}</span>
 
                                 : <a href={resumelink} target='blank'> <span  
-                                style={{cursor:'pointer',color:global_css.third_txt_color,fontWeight:'500'}}
-                                onMouseDown={(e)=>{(e.currentTarget.style.color='red');}}
-                                onMouseUp={(e)=>(e.currentTarget.style.color='#000')}
-                                onMouseEnter={(e)=>{(e.currentTarget.style.color='orangered');}}
-                                onMouseLeave={(e)=>{(e.currentTarget.style.color='#000');}}
+                                style={{cursor:'pointer',color:global_css.third_txt_color,fontWeight:'500',
+                                  color: global_css.third_txt_color,
+                                  padding: '8px 16px',
+                                  borderRadius: '20px',
+                                  transition:"all 400ms",
+                                  backgroundColor:`${clickeditem === i.item ? '#f7deea':'transparent'}`
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.backgroundColor = '#f7deea';
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.backgroundColor =  `${clickeditem === i.item ? '#f7deea':'transparent'}`;
+                                }}
+                                onClick={()=>setclickeditem(i.item)}
                                 >{i.item}</span> </a>}
                                  </>
                               )
                             })}
-            </div>
+            </div> 
+           
                
 
 
@@ -122,7 +148,6 @@ const Navabar = () => {
          <style>
             {`
             .navbar {
-                transition: box-shadow 400ms ease;
                 background-color:transparent;
                 height:5rem;
                 transition: all 400ms ;
@@ -131,7 +156,6 @@ const Navabar = () => {
               }
               
               .shadow {
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                 // background-color:white;
                 height:3.5rem;
                 transition: all 400ms ;

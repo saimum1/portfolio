@@ -42,8 +42,8 @@ const Postpage = () => {
                    <div style={{height:'75%',width:'70%',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
 
                     <div style={{flex:1,display:'flex',justifyContent:'center',alignItems:'flex-start',flexDirection:'column',height:'100%',width:'100%',gap:'.7rem',fontFamily:'Inter'}}>
-                      <span style={{display:'flex',justifyContent:'flex-start',alignItems:'center',textAlign:'left',fontSize:'2.5rem',fontWeight:'700',color:'#000'}}>{post?.title}</span>
-                      <span style={{display:'flex',justifyContent:'flex-start',alignItems:'center',textAlign:'left',fontSize:'1.4rem',fontWeight:'300',color:'#000'}}>{post?.description}</span>
+                      <span style={{fontFamily:'ui-sans-serif',display:'flex',justifyContent:'flex-start',alignItems:'center',textAlign:'left',fontSize:'2.5rem',fontWeight:'700',color:'#000'}}>{post?.title}</span>
+                      <span style={{fontFamily:'ui-sans-serif',display:'flex',justifyContent:'flex-start',alignItems:'center',textAlign:'left',fontSize:'1.4rem',fontWeight:'300',color:'#000'}}>{post?.description}</span>
                     </div>
                     <div style={{flex:1,display:'flex',justifyContent:'flex-start',alignItems:'flex-start',flexDirection:'column',height:'100%',width:'100%'}}>
                        <img src={ `${config.apiUrl}/${post?.image_url}`} style={{width:'100%' ,height:'100%' ,objectFit:'cover',border:'1px',borderRadius:'3px'}}/>

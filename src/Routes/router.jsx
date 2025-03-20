@@ -5,6 +5,7 @@ import InventoryTable from "../Components/InventoryTable/InventoryTable.jsx";
 import Hero from "../Components/Home/Hero.jsx";
 import Projectpage from "../Components/Home/Projectpage.jsx";
 import Postpage from "../Components/Home/Postpage.jsx";
+import Blogpage from "../Components/Home/Blogpage.jsx";
 export const router = createBrowserRouter([
     
     {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
                 path : '/postpage/:postId',
                 element :<Postpage/>
             },
+            {
+                path : '/blogs',
+                element :<Blogpage/>
+            }
             // {
             //     path : '/inventory',
             //     element : <InventoryTable></InventoryTable>
