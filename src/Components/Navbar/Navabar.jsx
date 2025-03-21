@@ -93,7 +93,7 @@ const Navabar = () => {
                   </Link>
 
                </div>
-             <div style={{flex:1,display : 'flex', gap : '3%', alignItems : 'center' ,justifyContent:'flex-end',color:'#7A8389'}}>
+             <div style={{flex:1,display : 'flex', gap : '3%', alignItems : 'center' ,justifyContent:'flex-end',color:'#7A8389',fontWeight:'700'}}>
                 {itemlist?.map((i)=>{
                               return (
 
@@ -102,36 +102,34 @@ const Navabar = () => {
                             
                               
                                 <span  
-                                style={{cursor:'pointer',color:global_css.third_txt_color,fontWeight:'500',
-                                  color: global_css.third_txt_color,
+                                style={{cursor:'pointer',
                                   padding: '8px 16px',
                                   borderRadius: '20px',
                                   transition:"all 400ms",
-                                  backgroundColor:`${clickeditem === i.item ? '#f7deea':'transparent'}`
+                                  backgroundColor:`${clickeditem === i.item ? '#ffcece':'transparent'}`
                                 }}
                                 
                                 onMouseEnter={(e) => {
-                                  e.currentTarget.style.backgroundColor = '#f7deea';
+                                  e.currentTarget.style.backgroundColor = '#ffcece';
                                 }}
                                 onMouseLeave={(e) => {
-                                  e.currentTarget.style.backgroundColor = `${clickeditem === i.item ? '#f7deea':'transparent'}`;
+                                  e.currentTarget.style.backgroundColor = `${clickeditem === i.item ? '#ffcece':'transparent'}`;
                                 }}
                                  onClick={()=>redirectToPage(i.item,i.route)}
                                 >{i.item}</span>
 
                                 : <a href={resumelink} target='blank'> <span  
-                                style={{cursor:'pointer',color:global_css.third_txt_color,fontWeight:'500',
-                                  color: global_css.third_txt_color,
+                                style={{cursor:'pointer',
                                   padding: '8px 16px',
                                   borderRadius: '20px',
                                   transition:"all 400ms",
-                                  backgroundColor:`${clickeditem === i.item ? '#f7deea':'transparent'}`
+                                  backgroundColor:`${clickeditem === i.item ? '#ffcece':'transparent'}`
                                 }}
                                 onMouseEnter={(e) => {
-                                  e.currentTarget.style.backgroundColor = '#f7deea';
+                                  e.currentTarget.style.backgroundColor = '#ffcece';
                                 }}
                                 onMouseLeave={(e) => {
-                                  e.currentTarget.style.backgroundColor =  `${clickeditem === i.item ? '#f7deea':'transparent'}`;
+                                  e.currentTarget.style.backgroundColor =  `${clickeditem === i.item ? '#ffcece':'transparent'}`;
                                 }}
                                 onClick={()=>setclickeditem(i.item)}
                                 >{i.item}</span> </a>}

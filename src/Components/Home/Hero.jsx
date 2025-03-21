@@ -114,7 +114,6 @@ const Hero = () => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   boxSizing: 'border-box',
-                  fontFamily: 'Arial, sans-serif',
                   borderRadius: '20px', 
                   paddingTop:'5rem'
                 }}>
@@ -230,15 +229,15 @@ const Hero = () => {
                                <div
                                   key={index} style={{ height: '28rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '0rem',padding:'1rem',borderRadius:'.5rem' }}>
                                    
-                                   <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
+                                   <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%', }}>
                                    
                                         <div  className='box' style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%',borderRadius:'5px',border:'1px solid #999999' }}>
                                             <img className='boximage'  src={`${config.apiUrl}/${value?.image_url}`} style={{ height: '17rem', width: '100%'}} alt="Featured" />
                                         </div>
                                     </div>
 
-                                    <span style={{ flex: 1, backgroundColor: '', height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color, fontSize:'1.6rem', fontWeight: '600',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
-                                    <span style={{ flex: 2, backgroundColor: '', height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400',textAlign:'justify',fontFamily:'ui-sans-serif' }}>{value?.description}</span>
+                                    <span style={{ flex: 1, backgroundColor: '',color:'#6C757D', height: '100%', display: 'flex', width: '100%',fontSize:'1.6rem', fontWeight: '700',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
+                                    <span style={{ flex: 2, backgroundColor: '',color:'#6C757D', height: '100%', width: '100%',  fontSize: '1rem', fontWeight: '400',textAlign:'justify',fontFamily:'ui-sans-serif' }}>{value?.description}</span>
                                 </div>
                                 </Link>
                             ))}
@@ -272,8 +271,8 @@ const Hero = () => {
                                        <img className='boximage'  src={`${config.apiUrl}/${value?.image_url}`} style={{ height: '12rem', width: '100%'}} alt="Featured" />
                                    </div>
                                </div>
-                                    <span style={{ flex: 1, height: '100%', display: 'flex', width: '100%',color:global_css.third_txt_color,fontSize:'1.6rem', fontWeight: '600',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
-                                    <span style={{ flex: 2,  height: '100%', width: '100%', color: '#000', fontSize: '1rem', fontWeight: '400' ,fontFamily:'ui-sans-serif'}}>{value?.description}</span>
+                                    <span style={{ flex: 1,color:'#6C757D', height: '100%', display: 'flex', width: '100%',fontSize:'1.6rem', fontWeight: '700',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
+                                    <span style={{ flex: 2,color:'#6C757D',  height: '100%', width: '100%', fontSize: '1rem', fontWeight: '400' ,fontFamily:'ui-sans-serif'}}>{value?.description}</span>
                                 </div>
 
                                 </a>
