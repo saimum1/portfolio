@@ -76,7 +76,7 @@ const Navabar = () => {
                
      
                >
-                  <Link to={`/`}>
+                  <Link to={`/`} onClick={()=>setclickeditem('')}>
                      <p style={{
                                 fontSize: '1.5rem',
                                 lineHeight: '1.25rem',
