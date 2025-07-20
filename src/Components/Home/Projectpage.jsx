@@ -38,7 +38,7 @@ const Projectpage = () => {
                 <div className="card-container" style={{background:'', height:'20rem', width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', flexDirection:'column', gap:'0.6rem', cursor:'pointer'}}>
                   <div className='card-image-container' style={{flex:4, height:'100%', width:'100%'}}>
                     <div className='card-image-box' style={{height:'100%', width:'100%', borderRadius:'5px', border:'1px solid #999999', overflow:'hidden'}}>
-                      <img className='card-image' src={`${config.apiUrl}/${value?.image_url}`} style={{height:'15rem', width:'100%', objectFit:'cover'}} alt={value?.title} />
+                      <img className='card-image' src={`${value?.image_url}`} style={{height:'15rem', width:'100%', objectFit:'cover'}} alt={value?.title} />
                     </div>
                   </div>
                   <h3 style={{fontFamily:'ui-sans-serif', marginTop:'0.5rem', height:'auto', display:'flex', width:'100%', color:'#6C757D', fontSize:'1.4rem', fontWeight:'700'}}>{value?.title}</h3>

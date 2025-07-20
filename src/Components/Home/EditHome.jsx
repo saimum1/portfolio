@@ -299,7 +299,7 @@ const EditHome = ({getpageaction}) => {
                             (logophoto !== '' && logourl === '') ? 
                                logophoto :
                                 (logophoto === '' && logourl !== '') ? 
-                                    `${config.apiUrl}/${logourl}` :
+                                    `${logourl}` :
                                     ''
                         }
                         alt="image"
@@ -356,7 +356,7 @@ const EditHome = ({getpageaction}) => {
                             (item.imageUrl !== '' && item.imageprevurl === '') ? 
                                 item.imageUrl :
                                 (item.imageUrl === '' && item.imageprevurl !== '') ? 
-                                    `${config.apiUrl}/${item.imageprevurl}` :
+                                    `${item.imageprevurl}` :
                                     ''
                         }
                         alt="Featured"
