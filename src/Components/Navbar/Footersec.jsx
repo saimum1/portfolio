@@ -62,7 +62,7 @@ const Footersec = () => {
           }}>
           
                 {/* <img src={logo}/> */}
-                <img src={`${config.apiUrl}/${logourl && logourl}`}  alt='logo'/>
+                <img src={`${logourl && logourl}`}  alt='logo'/>
 
              
           </p>
@@ -102,7 +102,7 @@ const Footersec = () => {
             {items?.map((n)=>{
               return(
                 <a href={n.linkurlmedia} target='blank'>
-                   <img src={`${config.apiUrl}/${n?.image_url}`} style={{width:"30px",height:"30px"}}/></a> 
+                   <img src={`${n?.image_url}`} style={{width:"30px",height:"30px"}}/></a> 
               )
             })}
         
