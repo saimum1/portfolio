@@ -87,7 +87,7 @@ const Navabar = () => {
                                 width:`${hasShadow ? '6rem' : '8rem'}`
                               }}>
                               
-                                    <img src={`${config.apiUrl}/${logourl && logourl}`}  alt='logo'/>
+                                    <img src={`${logourl && logourl}`}  alt='logo'/>
                                  
                               </p>
                   </Link>
