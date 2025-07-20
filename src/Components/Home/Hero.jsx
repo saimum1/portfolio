@@ -1,57 +1,16 @@
 import React,{useState,useEffect} from 'react'
-import behanceicon from '../../assets/static/Behance.svg'
-import linkedinicon from '../../assets/static/Linkedin.svg'
-import boxicon from '../../assets/static/linked.svg'
-import sicon from '../../assets/static/s.svg'
-import giticon from '../../assets/static/github.png'
-import image1 from '../../assets/static/Image1.png'
-import image2 from '../../assets/static/Image2.png'
-import image3 from '../../assets/static/Image3.png'
-import image4 from '../../assets/static/s.svg'
-import darkpr from '../../assets/static/darkpr.png'
 import pcs from '../../assets/static/px.png'
-
 import axios from "axios";
-import { StatusOnlineIcon, SearchIcon } from "@heroicons/react/outline";
-import {
-    Badge,
-    Card, Icon, Select, SelectItem,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeaderCell,
-    TableRow,
-    Text, TextInput,
-    Title,
-
-
-} from "@tremor/react";
-import {Button} from "@chakra-ui/react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronDown, faChevronUp, faEllipsisVertical} from "@fortawesome/free-solid-svg-icons";
-import {useDisclosure} from "@chakra-ui/react";
-import {global_css} from "../../GlobalCss/GlobalCSS.js";
 import config from "../../config.jsx";
-import toast from "react-hot-toast";
-import Editopstions from "../EditFunctionality/Editopstions.jsx";
-import SearchDialouge from "../SearchComponent/SearchDialouge.jsx";
-import AlertBox from "../AlertBox/AlertBox.jsx";
-import Nodatafound from "../NoDataFound/Nodatafound.jsx";
-import LoadingSoS from "../LoadingScreen/LoadingSoS.jsx";
-import Popnotification from "../PopNotification/Popnotification.jsx";
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 const Hero = () => {
 
   const navigate = useNavigate();
   const [data,setdata]=useState([])
-  const [titlefirst, settitlefirst] = useState('');
-  const [titlesecond, settitlesecond] = useState('');
+  const [mail, settmail] = useState('');
+  const [number, setnumber] = useState('');
   const [items, setItems] = useState([]);
-
-
-
   const getdata=async()=>{
     const response = await axios.get(`${config.apiUrl}/getdatax`,{
       params:{
@@ -62,8 +21,21 @@ const Hero = () => {
     setdata(response?.data)
   }
 
+   const getdata2=async()=>{
 
-
+      try {
+        const response = await axios.get(`${config.apiUrl}/userdata`);
+        const data = await response.data;
+        console.log("ssda342fa",data)
+        if (data) {
+            settmail(data?.profile[0]?.titlefirst);
+            setnumber(data?.profile[0]?.titlesecond)
+        } 
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        // Handle error
+    }
+    }
   
 
   useEffect(() => {
@@ -75,14 +47,7 @@ const Hero = () => {
        // Use smooth scrolling behavior
     });
     getdata()
-
-
-
-
-
-
-
-
+    getdata2()
 
     const handleKeyDown = (event) => {
       if (event.shiftKey && event.key === "D") {
@@ -97,6 +62,50 @@ const Hero = () => {
   };
   }, [navigate])
 
+
+ const handleHireMeClick = () => { 
+    const email = mail; // Replace with your actual email
+    const subject = 'Hiring Inquiry';
+    const body = 'Hello Rakibul, I am interested in hiring you for a project.';
+    const gmailLink = `googlegmail:///co?to=${email}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const fallbackLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Attempt to open the Gmail app
+    const start = Date.now();
+    window.location.href = gmailLink;
+
+    // Fallback to mailto (default email client or web) if Gmail app doesn't open within 2 seconds
+    setTimeout(() => {
+      if (Date.now() - start < 2100) {
+        window.location.href = fallbackLink;
+      }
+    }, 2000);
+  };
+  // Function to handle "Contact Me" button click
+  const handleContactMeClick = () => {
+    const phoneNumber = number; // Replace with your actual phone number in international format
+    const message = 'Hello Rakibul, I would like to discuss a potential collaboration.';
+    const whatsappLink = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+    const fallbackLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    // Open a new blank window
+    const newWindow = window.open('about:blank', '_blank');
+    if (newWindow) {
+      // Attempt to open the WhatsApp app in the new window
+      const start = Date.now();
+      newWindow.location.href = whatsappLink;
+
+      // Fallback to web version if the app doesn't open within 2 seconds
+      setTimeout(() => {
+        if (Date.now() - start < 2100) {
+          newWindow.location.href = fallbackLink;
+        }
+      }, 2000);
+    } else {
+      // Fallback if new window fails to open (e.g., popup blocker)
+      window.location.href = fallbackLink;
+    }
+  };
 
 
 
@@ -155,7 +164,10 @@ const Hero = () => {
                       display: 'flex',
                       gap: '15px', // Gap between buttons
                     }}>
-                      <span style={{
+                      <span
+                        className="action-button"
+                      onClick={handleHireMeClick}
+                      style={{
                         backgroundColor: '#fff', // White button background like in the image
                         color: '#ff4d4d', // Red text to match the theme
                         padding: '10px 20px',
@@ -168,7 +180,10 @@ const Hero = () => {
                       }}>
                         Hire Me
                       </span>
-                      <span style={{
+                      <span 
+                        className="action-button"
+                      onClick={handleContactMeClick}
+                      style={{
                         backgroundColor: '#fff',
                         color: '#ff4d4d',
                         padding: '10px 20px',
@@ -402,6 +417,21 @@ body {
   }
 }
 
+
+
+
+          .action-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            background-color: #f8f8f8;
+          }
+
+          .action-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            background-color: #e0e0e0;
+            transition: transform 0.1s, box-shadow 0.1s, background-color 0.1s;
+          }
 
 
 
