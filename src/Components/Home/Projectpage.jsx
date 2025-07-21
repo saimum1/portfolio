@@ -40,7 +40,7 @@ const Projectpage = () => {
                                         key={index}
                                         style={{
                                           cursor:'pointer',
-                                          height: '28rem',
+                                          height: '29rem',
                                           width: '100%',
                                           display: 'flex',
                                           justifyContent: 'space-between',
@@ -77,7 +77,7 @@ const Projectpage = () => {
                                               className="boximage"
                                               src={`${value?.image_url}`}
                                               style={{
-                                                height: '17rem',
+                                                height: '14rem',
                                                 width: '100%',
                                                 borderRadius: '5px',
                                                 transition: 'transform 0.3s ease',
@@ -94,10 +94,26 @@ const Projectpage = () => {
                                             />
                                           </div>
                                         </div>
-                                        <span style={{ flex: 1, color: '#000000', height: '100%', width: '100%', fontSize: '1.6rem', fontWeight: '700', fontFamily: 'ui-sans-serif', textAlign: 'center' }}>
+                                        <span style={{ flex: 1, color: '#000000', height: '100%', width: '100%', fontSize: '1.6rem', fontWeight: '700', fontFamily: 'ui-sans-serif', textAlign: 'left' }}>
                                           {value?.title}
                                         </span>
-                                        <span style={{ flex: 2, color: '#6C757D', height: '100%', width: '100%', fontSize: '1rem', fontWeight: '400', textAlign: 'justify', fontFamily: 'ui-sans-serif' }}>
+                                        <span
+                                         style={{
+                                          flex: 2,
+                                          color: '#6C757D',
+                                          height: 'auto', // Changed to auto for dynamic height
+                                          width: '100%',
+                                          fontSize: '1rem',
+                                          fontWeight: '400',
+                                          fontFamily: 'ui-sans-serif',
+                                          wordBreak: 'break-word', // Ensures text breaks at word boundaries
+                                          overflowWrap: 'break-word', // Allows long words to wrap
+                                          whiteSpace: 'normal', // Prevents text from overflowing
+                                          lineHeight: '1.4', // Improves readability with consistent line spacing
+                                          overflow: 'hidden', // Hides any overflow if necessary
+                                          textOverflow: 'ellipsis', // Optional: adds ellipsis if text is truncated
+                                        }}
+                                         >
                                           {value?.description}
                                         </span>
                                       </div>

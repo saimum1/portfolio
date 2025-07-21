@@ -65,7 +65,7 @@ const Blogpage = () => {
                               <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                    
                                    <div   style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%',borderRadius:'5px',boxShadow:'0 10px 20px rgba(0, 0, 0, 0.2)',overflow:'hidden' }}>
-                                       <img className='boximage'  src={`${value?.image_url}`} style={{ height: '12rem', width: '100%'}} alt="Featured" />
+                                       <img className='boximage'  src={`${value?.image_url}`} style={{ height: '14rem', width: '100%'}} alt="Featured" />
                                    </div>
                                </div>
                                     <span style={{ flex: 1,color:'#000000', height: '100%', display: 'flex', width: '100%',fontSize:'1.2rem', fontWeight: '700',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
