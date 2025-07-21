@@ -46,7 +46,7 @@ const Projectpage = () => {
                                           justifyContent: 'space-between',
                                           alignItems: 'center',
                                           flexDirection: 'column',
-                                          gap: '0rem',
+                                          gap: '1rem',
                                           padding: '1rem',
                                           borderRadius: '0.5rem',
                                           backgroundColor: '#fcf8f7',
