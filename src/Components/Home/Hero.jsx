@@ -236,6 +236,7 @@ const Hero = () => {
                             <span style={{color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2.5rem'}}> SELECTED WORK</span>
                             <span style={{backgroundColor:'#6C757D',width:'100%',height:'1.5px'}}> </span>
                           </div>
+                     
                       <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', transition: 'all 300ms', cursor: 'pointer' }}>
                         {data?.filter((value) => value?.selected === 'true' && value?.category === 'post')?.map((value, index) => (
                           <Link to={`/postpage/${value?.postid}`}>
@@ -263,7 +264,7 @@ const Hero = () => {
                                 e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
                               }}
                             >
-                              <div className="boxparent" style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
+                              <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                 <div
                                   className="box"
                                   style={{
@@ -271,8 +272,8 @@ const Hero = () => {
                                     height: '100%',
                                     width: '100%',
                                     borderRadius: '5px',
-                                    border: '1px solid #999999',
                                     overflow: 'hidden',
+                                    boxShadow:'0 10px 20px rgba(0, 0, 0, 0.2)'
                                   }}
                                 >
                                   <img
@@ -350,10 +351,10 @@ const Hero = () => {
                               }}
                                   >
 
-                              <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
+                              <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                    
-                                   <div  className='box' style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%',borderRadius:'5px',border:'1px solid #999999' }}>
-                                       <img className='boximage'  src={`${value?.image_url}`} style={{ height: '12rem', width: '100%'}} alt="Featured" />
+                                   <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%',borderRadius:'5px',boxShadow:'0 10px 20px rgba(0, 0, 0, 0.2)',overflow:'hidden' }}>
+                                       <img className="boximage"   src={`${value?.image_url}`} style={{ height: '12rem', width: '100%'}} alt="Featured" />
                                    </div>
                                </div>
                                     <span style={{ flex: 1,color:'#000000', height: '100%', display: 'flex', width: '100%',fontSize:'1.2rem', fontWeight: '700',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
@@ -487,7 +488,7 @@ body {
 
 }
 .boximage:hover{
-  transform:scale(.5);
+  transform:scale(1);
   transition:all 300ms;
   box-shadow:1px 1px 15px #999990;
   transition:all 500ms;

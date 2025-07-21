@@ -60,9 +60,9 @@ const Projectpage = () => {
                                           e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
                                         }}
                                       >
-                                        <div className="boxparent" style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
+                                        <div style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                           <div
-                                            className="box"
+                                         
                                             style={{
                                               flex: 4,
                                               height: '100%',
@@ -70,6 +70,7 @@ const Projectpage = () => {
                                               borderRadius: '5px',
                                               border: '1px solid #999999',
                                               overflow: 'hidden',
+                                              boxShadow:'0 10px 20px rgba(0, 0, 0, 0.2)',overflow:'hidden'
                                             }}
                                           >
                                             <img
@@ -81,6 +82,7 @@ const Projectpage = () => {
                                                 borderRadius: '5px',
                                                 transition: 'transform 0.3s ease',
                                                 transform: 'scale(1)',
+
                                               }}
                                               onMouseEnter={(e) => {
                                                 e.currentTarget.style.transform = 'scale(1.1)';

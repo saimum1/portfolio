@@ -62,9 +62,9 @@ const Blogpage = () => {
                               }}
                                   >
 
-                              <div className='boxparent'  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
+                              <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                    
-                                   <div  className='box' style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%',borderRadius:'5px',border:'1px solid #999999' }}>
+                                   <div   style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%',borderRadius:'5px',boxShadow:'0 10px 20px rgba(0, 0, 0, 0.2)',overflow:'hidden' }}>
                                        <img className='boximage'  src={`${value?.image_url}`} style={{ height: '12rem', width: '100%'}} alt="Featured" />
                                    </div>
                                </div>
