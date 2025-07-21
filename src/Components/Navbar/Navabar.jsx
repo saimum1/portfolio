@@ -27,7 +27,8 @@ const Navabar = () => {
   const itemlist=[
   {'item':'Projects','route':'/projects'} ,
   {'item':'Blog','route':'/blogs'} ,
-  {'item':'Resume','route':'/'}]
+  {'item':'Resume','route':'/'},
+]
 
   const getdata=async()=>{
     try {

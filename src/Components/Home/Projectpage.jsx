@@ -27,98 +27,283 @@ const Projectpage = () => {
   
   return (
     <div style={{width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column'}}>
-      <div style={{width:'70%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', marginTop:'2rem', background:''}}>
-        <div style={{height:'2rem'}}></div>
+      <div style={{width:'70%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',marginTop:'4.5rem',background:''}}>
+                <div style={{height:'4rem'}}></div>
+
         <div style={{width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', gap:'1.5rem'}}>
           <div style={{width:'100%', flex:'1', display:'flex', justifyContent:'flex-start', flexDirection:'column', gap:'1rem'}}></div>
           
-          <div className="card-grid" style={{width:'100%', display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(3, 1fr))', gap:'2rem',marginTop:'4.5rem'}}>
-            {post?.filter((value) => {return value?.category === 'post'})?.map((value, index) => (
-              <Link to={`/postpage/${value?.postid}`} key={index} className='card-item'>
-                <div className="card-container" style={{background:'', height:'20rem', width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', flexDirection:'column', gap:'0.6rem', cursor:'pointer'}}>
-                  <div className='card-image-container' style={{flex:4, height:'100%', width:'100%'}}>
-                    <div className='card-image-box' style={{height:'100%', width:'100%', borderRadius:'5px', border:'1px solid #999999', overflow:'hidden'}}>
-                      <img className='card-image' src={`${value?.image_url}`} style={{height:'15rem', width:'100%', objectFit:'cover'}} alt={value?.title} />
-                    </div>
-                  </div>
-                  <h3 style={{fontFamily:'ui-sans-serif', marginTop:'0.5rem', height:'auto', display:'flex', width:'100%', color:'#6C757D', fontSize:'1.4rem', fontWeight:'700'}}>{value?.title}</h3>
-                  <p style={{fontFamily:'ui-sans-serif', height:'auto', width:'100%', color:'#6C757D', fontSize:'0.9rem', fontWeight:'400', textAlign:'justify'}}>{value?.description}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+           <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', transition: 'all 300ms', cursor: 'pointer' }}>
+                                  {post?.filter((value) => {return value?.category === 'post'})?.map((value, index) => (
+                                    <Link to={`/postpage/${value?.postid}`}>
+                                      <div
+                                        key={index}
+                                        style={{
+                                          cursor:'pointer',
+                                          height: '28rem',
+                                          width: '100%',
+                                          display: 'flex',
+                                          justifyContent: 'space-between',
+                                          alignItems: 'center',
+                                          flexDirection: 'column',
+                                          gap: '0rem',
+                                          padding: '1rem',
+                                          borderRadius: '0.5rem',
+                                          backgroundColor: '#fcf8f7',
+                                          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                                          transition: 'box-shadow 0.3s ease',
+                                        }}
+                                        onMouseEnter={(e) => {
+                                          e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.2)';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                          e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                                        }}
+                                      >
+                                        <div className="boxparent" style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
+                                          <div
+                                            className="box"
+                                            style={{
+                                              flex: 4,
+                                              height: '100%',
+                                              width: '100%',
+                                              borderRadius: '5px',
+                                              border: '1px solid #999999',
+                                              overflow: 'hidden',
+                                            }}
+                                          >
+                                            <img
+                                              className="boximage"
+                                              src={`${value?.image_url}`}
+                                              style={{
+                                                height: '17rem',
+                                                width: '100%',
+                                                borderRadius: '5px',
+                                                transition: 'transform 0.3s ease',
+                                                transform: 'scale(1)',
+                                              }}
+                                              onMouseEnter={(e) => {
+                                                e.currentTarget.style.transform = 'scale(1.1)';
+                                              }}
+                                              onMouseLeave={(e) => {
+                                                e.currentTarget.style.transform = 'scale(1)';
+                                              }}
+                                              alt="Featured"
+                                            />
+                                          </div>
+                                        </div>
+                                        <span style={{ flex: 1, color: '#000000', height: '100%', width: '100%', fontSize: '1.6rem', fontWeight: '700', fontFamily: 'ui-sans-serif', textAlign: 'center' }}>
+                                          {value?.title}
+                                        </span>
+                                        <span style={{ flex: 2, color: '#6C757D', height: '100%', width: '100%', fontSize: '1rem', fontWeight: '400', textAlign: 'justify', fontFamily: 'ui-sans-serif' }}>
+                                          {value?.description}
+                                        </span>
+                                      </div>
+                                    </Link>
+                                  ))}
+                                </div>
         </div>
         <div style={{height:'4rem'}}></div>
       </div> 
       <style jsx>
         {`
-          ::-webkit-scrollbar {
-            width: 0;
-          }
-          
-          ::-webkit-scrollbar-track {
-            background: transparent;
-          }
-          
-          ::-webkit-scrollbar-thumb {
-            background: transparent;
-          }
-          
-          .card-item {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 600ms ease forwards;
-            animation-timeline: view();
-            animation-range: entry 10% cover 40%;
-            border-radius: .5rem;
-          }
-          
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          .card-image-container {
-            transition: transform 0.3s ease;
+        
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+
+body {
+  -ms-overflow-style: none;
+  font-family: Inter;
+}
+
+/* Hide scrollbar for Firefox */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+            .marquee-w {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 140px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             overflow: hidden;
           }
-          
-          .card-image-container:hover {
-            box-shadow: 0 10px 20px rgba(0, 85, 188, 0.3);
-            transform: translateY(-5px);
+.marquee {
+  position: absolute;
+  display: block;
+  margin: auto auto;
+  white-space: nowrap;
+  overflow: hidden;
+  min-width: 100%;
+  height: 100%;
+}
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  font-family: 'poppinsbold';
+  text-align: center;
+  -webkit-text-stroke: 1px #0055bc;
+  white-space: nowrap;
+  min-width: 100%;
+  height: 100%;
+  line-height: 140px;
+  font-size: 4rem;
+  animation: marquee 12s linear infinite;
+}
+
+
+.boxparent{
+  transition:all 300ms;
+}
+
+.boxparent:hover{
+  box-shadow:2px 2px 15px  #0055bc;
+  transition:all 300ms;
+}
+.box{
+  transition:all 300ms;
+  overflow:hidden;
+
+}
+
+.box:hover{
+  box-shadow:1px 1px 10px solid  #999990;
+  transition:all 300ms;
+  
+
+}
+
+
+.imaghover{
+  transition:all 300ms;
+}
+
+.imaghover:hover{
+  transform:scale(1.2);
+  transition:all 300ms;
+}
+
+.boximage{
+  transition:all 500ms;
+
+  
+
+}
+.boximage:hover{
+  transform:scale(.5);
+  transition:all 300ms;
+  box-shadow:1px 1px 15px #999990;
+  transition:all 500ms;
+}
+.marquee2 span {
+  animation-delay: 5s;
+}
+@keyframes marquee {
+  0% {
+      transform: translate(0, 0);
+  }
+  100% {
+      transform: translate(-100%, 0);
+  }
+}
+
+
+
+
+          .action-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            background-color: #f8f8f8;
           }
-          
-          .card-image-box {
-            transition: all 0.3s ease;
+
+          .action-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            background-color: #e0e0e0;
+            transition: transform 0.1s, box-shadow 0.1s, background-color 0.1s;
           }
-          
-          .card-image {
-            transition: transform 0.5s ease;
-            display: block;
+
+
+  @media (max-width: 768px) {
+          .hero-container {
+            flex-direction: column;
+            padding: 1rem;
           }
-          
-          .card-image-container:hover .card-image {
-            transform: scale(1.1);
+          .hero-text {
+            align-items: center;
+            text-align: center;
           }
-          
-          /* Responsive styles */
-          @media (max-width: 768px) {
-            .card-grid {
-              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
+          .hero-image {
+            justify-content: center;
+            margin-top: 1rem;
           }
-          
-          @media (min-width: 1200px) {
-            .card-grid {
-              grid-template-columns: repeat(3, 1fr);
-            }
+          .hero-grid {
+            grid-template-columns: 1fr;
           }
+          p {
+            font-size: 1.2rem !important;
+          }
+          span {
+            font-size: 1.5rem !important;
+          }
+          .action-button {
+            margin: 0.5rem 0;
+            padding: 8px 16px;
+            font-size: 14px;
+          }
+          img[alt='Profile'] {
+            width: 70%;
+            margin: 0 auto;
+          }
+          div[style*='gridTemplateColumns'] {
+            grid-template-columns: 1fr;
+          }
+          div[style*='height: 28rem'] {
+            height: auto;
+            min-height: 20rem;
+          }
+          div[style*='height: 17rem'] img {
+            height: 12rem;
+          }
+          div[style*='height: 12rem'] img {
+            height: 10rem;
+          }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .hero-container {
+            padding: 1.5rem;
+          }
+          .hero-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          p {
+            font-size: 1.5rem !important;
+          }
+          span {
+            font-size: 2rem !important;
+          }
+          .action-button {
+            padding: 10px 18px;
+            font-size: 15px;
+          }
+          div[style*='height: 28rem'] {
+            height: auto;
+            min-height: 22rem;
+          }
+          div[style*='height: 17rem'] img {
+            height: 14rem;
+          }
+          div[style*='height: 12rem'] img {
+            height: 11rem;
+          }
+        }
+
         `}
       </style>
     </div>
