@@ -43,10 +43,12 @@ export const themeStyles = {
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(localStorage.getItem('user-theme') || 'light');
+
   useEffect(() => {
     localStorage.setItem('user-theme', theme);
   }, [theme]);
 
+ 
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };

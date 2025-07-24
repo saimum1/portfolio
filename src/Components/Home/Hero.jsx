@@ -350,7 +350,7 @@ const Hero = () => {
 
                         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem',transition:'all 300ms'}}>
                          {data?.filter((value)=> {return value?.selected === 'true' && value?.category === 'write'})?.map((value, index) => (
-                              <a href={value?.content} target='blank'>
+                              <a href={value?.content} target='_blank' >
                                 <div 
                                onMouseEnter={(e) => {
                                 e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
