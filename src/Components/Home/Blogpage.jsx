@@ -1,12 +1,14 @@
 
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import axios from "axios";
 import config from "../../config.jsx";
 import { Link } from 'react-router-dom';
 import { global_css } from '../../GlobalCss/GlobalCSS.js';
-
+import { themeStyles,ThemeContext } from '../../Layout/ThemeContext.jsx';
 const Blogpage = () => { 
   const [post, setPost] = useState(null);
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const styles = themeStyles[theme];
 
     const getdata=async()=>{
       
@@ -39,10 +41,10 @@ const Blogpage = () => {
                               <a href={value?.content} target='blank'>
                                 <div 
                                  onMouseEnter={(e) => {
-                                e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.2)';
+                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
                               }}
                               onMouseLeave={(e) => {
-                                e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundShadow}`;
                               }}
                                  key={index}
                                   style={{
@@ -53,26 +55,25 @@ const Blogpage = () => {
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
                                 flexDirection: 'column',
-                                gap: '1rem',
+                                // gap: '1rem',
                                 padding: '1rem',
                                 borderRadius: '0.5rem',
-                                backgroundColor: '#fcf8f7',
-                                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                                 backgroundColor: styles.cardBackground,
+                                boxShadow: `${styles.cardBackgroundShadow}`,
                                 transition: 'box-shadow 0.3s ease',
                               }}
                                   >
 
                               <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
-                                   
-                                   <div   style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%',borderRadius:'5px',boxShadow:'0 10px 20px rgba(0, 0, 0, 0.2)',overflow:'hidden' }}>
+                                   <div   style={{ flex: 4, backgroundColor: '', height: '85%', width: '100%',borderRadius:'5px',boxShadow: `${styles.imageShadow}`,overflow:'hidden' }}>
                                        <img className='boximage'  src={`${value?.image_url}`} style={{ height: '14rem', width: '100%'}} alt="Featured" />
                                    </div>
                                </div>
-                                    <span style={{ flex: 1,color:'#000000', height: '100%', display: 'flex', width: '100%',fontSize:'1.2rem', fontWeight: '700',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
+                                    <span style={{ flex: 1,color:styles.text, height: '100%', display: 'flex', width: '100%',fontSize:'1.2rem', fontWeight: '700',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
                                     <span 
                                     style={{
                                         flex: 2,
-                                        color: '#6C757D',
+                                        color: styles.text,
                                         height: 'auto', 
                                         width: '100%',
                                         fontSize: '1rem',

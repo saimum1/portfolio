@@ -1,13 +1,16 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect, useContext} from 'react'
 import pcs from '../../assets/static/px.png'
 import axios from "axios";
 import config from "../../config.jsx";
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import ppimage from '../../assets/static/3d.png'
+import { themeStyles,ThemeContext } from '../../Layout/ThemeContext.jsx';
 const Hero = () => {
 
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const styles = themeStyles[theme];
   const [data,setdata]=useState([])
   const [mail, settmail] = useState('');
   const [number, setnumber] = useState('');
@@ -112,7 +115,7 @@ const Hero = () => {
 
   
   return (
-    <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column'}}>
+    <div style={{transition: 'background-color 0.3s ease, color 0.3s ease',width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column'}}>
 
               <div style={{width:'70%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',marginTop:'4.5rem',background:''}}>
 
@@ -134,7 +137,8 @@ const Hero = () => {
                     flexDirection: 'column',
                     justifyContent: 'center', 
                     alignItems: 'flex-start',
-                    color: '#6C757D',
+                    color:styles.text
+                    //  '#6C757D',
                   }}>
                     <p style={{
                       fontSize: '24px', 
@@ -169,14 +173,14 @@ const Hero = () => {
                         className="action-button"
                       onClick={handleHireMeClick}
                       style={{
-                        backgroundColor: '#fff', // White button background like in the image
+                        backgroundColor: styles.buttonBacnground, // White button background like in the image
                         color: '#ff4d4d', // Red text to match the theme
                         padding: '10px 20px',
                         borderRadius: '25px', // Rounded buttons
                         fontSize: '16px',
                         fontWeight: '600',
                         cursor: 'pointer',
-                        boxShadow: '0 5px 10px rgba(0, 0, 0, 0.1)', // Subtle shadow for buttons
+                        boxShadow: `${styles.buttonShadow}`, 
                         transition: 'transform 0.2s', // Smooth hover effect
                       }}>
                         Hire Me
@@ -185,14 +189,14 @@ const Hero = () => {
                         className="action-button"
                       onClick={handleContactMeClick}
                       style={{
-                        backgroundColor: '#fff',
+                        backgroundColor:styles.buttonBacnground,
                         color: '#ff4d4d',
                         padding: '10px 20px',
                         borderRadius: '25px',
                         fontSize: '16px',
                         fontWeight: '600',
                         cursor: 'pointer',
-                        boxShadow: '0 5px 10px rgba(0, 0, 0, 0.1)',
+                        boxShadow: `${styles.buttonShadow}`, 
                         transition: 'transform 0.2s',
                       }}>
                         Contact Me
@@ -223,6 +227,8 @@ const Hero = () => {
                         objectFit: 'cover',
                       }}
                     />
+
+        
                   </div>
 
                
@@ -234,8 +240,8 @@ const Hero = () => {
 
                   <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',gap:'2rem',marginTop:'5%'}}>
                         <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-start',flexDirection:'column',gap:'1rem'}}>
-                            <span style={{color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2.5rem'}}> SELECTED WORK</span>
-                            <span style={{backgroundColor:'#6C757D',width:'100%',height:'1.5px'}}> </span>
+                            <span style={{color:styles.text,letterSpacing:'.035rem',fontWeight:'700',fontSize:'2.5rem'}}> SELECTED WORK</span>
+                            <span style={{backgroundColor:styles.text,width:'100%',height:'1.5px'}}> </span>
                           </div>
                      
                       <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', transition: 'all 300ms', cursor: 'pointer' }}>
@@ -254,16 +260,16 @@ const Hero = () => {
                                 gap: '1rem',
                                 padding: '1rem',
                                 borderRadius: '0.5rem',
-                                backgroundColor: '#fcf8f7',
-                                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                                backgroundColor: styles.cardBackground,
+                                boxShadow: `${styles.cardBackgroundShadow}`,
                                 transition: 'box-shadow 0.3s ease',
                                 border:'1px solid #6C757D'
                               }}
                               onMouseEnter={(e) => {
-                                e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.2)';
+                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
                               }}
                               onMouseLeave={(e) => {
-                                e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundShadow}`;
                               }}
                             >
                               <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
@@ -275,7 +281,8 @@ const Hero = () => {
                                     width: '100%',
                                     borderRadius: '5px',
                                     overflow: 'hidden',
-                                    boxShadow:'0 10px 20px rgba(0, 0, 0, 0.2)'
+                                    boxShadow:`${styles.imageShadow}`
+                                    //  boxShadow:`0 2px 4px` ,
                                   }}
                                 >
                                   <img
@@ -298,13 +305,13 @@ const Hero = () => {
                                   />
                                 </div>
                               </div>
-                              <span style={{ flex: 1, color: '#000000', height: '100%', width: '100%', fontSize: '1.6rem', fontWeight: '700', fontFamily: 'ui-sans-serif', textAlign: 'left' }}>
+                              <span style={{ flex: 1,  color: styles.text, height: '100%', width: '100%', fontSize: '1.6rem', fontWeight: '700', fontFamily: 'ui-sans-serif', textAlign: 'left' }}>
                                 {value?.title}
                               </span>
                               <span 
                                 style={{
                                         flex: 2,
-                                        color: '#6C757D',
+                                        color: styles.text,
                                         height: 'auto', // Changed to auto for dynamic height
                                         width: '100%',
                                         fontSize: '1rem',
@@ -334,8 +341,8 @@ const Hero = () => {
                 <div style={{width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',gap:'2rem'}}>
                         <div style={{width:'100%' ,flex:'1',display:'flex',justifyContent:'flex-start',flexDirection:'column',gap:'1rem'}}>
                           
-                          <span style={{  color:'#6C757D',letterSpacing:'.035rem',fontWeight:'700',fontSize:'2.5rem'}}> WRITING</span>
-                          <span style={{backgroundColor:'#6C757D',width:'100%',height:'1.5px'}}> </span>
+                          <span style={{  color:styles.text,letterSpacing:'.035rem',fontWeight:'700',fontSize:'2.5rem'}}> WRITING</span>
+                          <span style={{backgroundColor:styles.text,width:'100%',height:'1.5px'}}> </span>
                           </div>
 
 
@@ -345,11 +352,11 @@ const Hero = () => {
                          {data?.filter((value)=> {return value?.selected === 'true' && value?.category === 'write'})?.map((value, index) => (
                               <a href={value?.content} target='blank'>
                                 <div 
-                                 onMouseEnter={(e) => {
-                                e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.2)';
+                               onMouseEnter={(e) => {
+                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
                               }}
                               onMouseLeave={(e) => {
-                                e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundShadow}`;
                               }}
                                  key={index}
                                   style={{
@@ -360,39 +367,39 @@ const Hero = () => {
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
                                 flexDirection: 'column',
-                                gap: '1rem',
+                                // gap: '1rem',
                                 padding: '1rem',
                                 borderRadius: '0.5rem',
                                 border:'1px solid #6C757D',
-                                backgroundColor: '#fcf8f7',
-                                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                                backgroundColor: styles.cardBackground,
+                                boxShadow: `${styles.cardBackgroundShadow}`,
                                 transition: 'box-shadow 0.3s ease',
                               }}
-                                  >
+                              >
 
                               <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                    
-                                   <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%',borderRadius:'5px',boxShadow:'0 10px 20px rgba(0, 0, 0, 0.2)',overflow:'hidden' }}>
+                                   <div  style={{ flex: 4, backgroundColor: '', height: '85%', width: '100%',borderRadius:'5px' ,boxShadow:` ${styles.imageShadow}`,overflow:'hidden' }}>
                                        <img className="boximage"   src={`${value?.image_url}`} style={{ height: '14rem', width: '100%'}} alt="Featured" />
                                    </div>
                                </div>
-                                    <span style={{ flex: 1,color:'#000000', height: '100%', display: 'flex', width: '100%',fontSize:'1.2rem', fontWeight: '700',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
+                                    <span style={{ flex: 1, color: styles.text, height: '100%', display: 'flex', width: '100%',fontSize:'1.2rem', fontWeight: '700',fontFamily:'ui-sans-serif' }}>{value?.title}</span>
                                     <span 
                                      style={{
                                      
                                         flex: 2,
-                                        color: '#6C757D',
-                                        height: 'auto', // Changed to auto for dynamic height
+                                        color:  styles.text,
+                                        height: 'auto',
                                         width: '100%',
                                         fontSize: '1rem',
                                         fontWeight: '400',
                                         fontFamily: 'ui-sans-serif',
-                                        wordBreak: 'break-word', // Ensures text breaks at word boundaries
-                                        overflowWrap: 'break-word', // Allows long words to wrap
-                                        whiteSpace: 'normal', // Prevents text from overflowing
-                                        lineHeight: '1.4', // Improves readability with consistent line spacing
-                                        overflow: 'hidden', // Hides any overflow if necessary
-                                        textOverflow: 'ellipsis', // Optional: adds ellipsis if text is truncated
+                                        wordBreak: 'break-word', 
+                                        overflowWrap: 'break-word',
+                                        whiteSpace: 'normal', 
+                                        lineHeight: '1.4', 
+                                        overflow: 'hidden', 
+                                        textOverflow: 'ellipsis', 
                                       }}
                                     >{value?.description}</span>
                                 </div>
@@ -625,5 +632,6 @@ body {
 }
 
 export default Hero
+
 
 

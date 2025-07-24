@@ -1,191 +1,437 @@
-import React, { useState,useEffect } from 'react';
-import logo from '../../assets/static/logox.svg'
-import {useAuth} from "../../Context/AuthInfo.jsx";
+
+
+
+
+import React, { useState, useEffect, useContext } from 'react';
+import { useAuth } from '../../Context/AuthInfo.jsx';
 import { Link, useNavigate } from 'react-router-dom';
-import { global_css } from '../../GlobalCss/GlobalCSS.js';
-import axios from "axios";
-import config from "../../config.jsx";
-const Navabar = () => {
-    const { userId , logout} = useAuth();
-  const[clicked,setclicked]=useState(false)
-  const[clickeditem,setclickeditem]=useState('')
-  const[resumelink,setresumelink]=useState('')
-  const[logourl,setlogourl]=useState('')
+import axios from 'axios';
+import config from '../../config.jsx';
+import { ThemeContext,themeStyles } from '../../Layout/ThemeContext.jsx';
+// import { ThemeContext, themeStyles } from './ThemeContext.jsx';
+
+const Navbar = () => {
+  const { userId, logout } = useAuth();
+  const { theme, toggleTheme ,setTheme} = useContext(ThemeContext);
+  const [clicked, setClicked] = useState(false);
+  const [clickedItem, setClickedItem] = useState('');
+  const [resumeLink, setResumeLink] = useState('');
+  const [logoUrl, setLogoUrl] = useState('');
   const navigate = useNavigate();
+  const [hasShadow, setHasShadow] = useState(false);
+  const styles = themeStyles[theme];
 
-
-
-
-
-  const redirectToPage = (i,e) => {
-    console.log("cada",i)
-    setclickeditem(i)
-    navigate(`${e}`);
+  const redirectToPage = (item, route) => {
+    setClickedItem(item);
+    navigate(route);
   };
 
-   
-  const itemlist=[
-  {'item':'Projects','route':'/projects'} ,
-  {'item':'Blog','route':'/blogs'} ,
-  {'item':'Resume','route':'/'},
-]
+  const itemList = [
+    { item: 'Projects', route: '/projects' },
+    { item: 'Blog', route: '/blogs' },
+    { item: 'Resume', route: '/' },
+  ];
 
-  const getdata=async()=>{
+  const getData = async () => {
     try {
       const response = await axios.get(`${config.apiUrl}/userdata`);
-      const data = await response.data;
-      console.log("sssasadafa",data)
+      const data = response.data;
       if (data) {
-          setresumelink(data?.profile[0]?.linkurlcv);
-          setlogourl(data?.profile[0]?.logourl)
-      } 
-  } catch (error) {
+        setResumeLink(data?.profile[0]?.linkurlcv);
+        setLogoUrl(data?.profile[0]?.logourl);
+      }
+    } catch (error) {
       console.error('Error fetching data:', error);
-  }
-  }
+    }
+  };
 
-    const [hasShadow, setHasShadow] = useState(false);
+  useEffect(() => {
+    getData();
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setHasShadow(scrollTop > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    useEffect(() => {
-      getdata()
-      const handleScroll = () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > 0) {
-          setHasShadow(true);
-        } else {
-          setHasShadow(false);
-        }
-      };
-  
-      window.addEventListener('scroll', handleScroll);
-  
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, []);
-    return (
-        
+
+
+  return (
+    <div
+      className={`navbar ${hasShadow ? 'shadow' : ''}`}
+      style={{
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'fixed',
+        zIndex: 999,
+        // backgroundColor: styles.navbarBackground,
+        transition: 'all 0.4s ease',
+        backdropFilter: hasShadow ? 'blur(8px)' : 'none',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          height: '100%',
+          width: '70%',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
         <div
-        className={`navbar ${hasShadow ? 'shadow' : ''}`}
-        
-        style={{display:"flex",transition:'all 400ms',
-        width:'100%',justifyContent:'center',alignItems:'center',position:'fixed' ,zIndex:'999'}} >
-            <div style={{display:"flex",height:"100%" ,
-        width:'70%',justifyContent:'space-between',alignItems:'center'}}>
-          
-               <div style={{flex:1,display:'flex',justifyContent:'flex-start',alignItems:'center',cursor:'pointer'}}
-               
-     
-               >
-                  <Link to={`/`} onClick={()=>setclickeditem('')}>
-                     <p style={{
-                                fontSize: '1.5rem',
-                                lineHeight: '1.25rem',
-                                fontWeight: '700',
-                                letterSpacing: '2px',
-                                textTransform: 'uppercase',
-                                transition:'all 600ms',
-                                width:`${hasShadow ? '6rem' : '8rem'}`
-                              }}>
-                              
-                                    <img src={`${logourl && logourl}`}  alt='logo'/>
-                                 
-                              </p>
-                  </Link>
-
-               </div>
-             <div style={{flex:1,display : 'flex', gap : '3%', alignItems : 'center' ,justifyContent:'flex-end',color:'#7A8389',fontWeight:'700'}}>
-                {itemlist?.map((i)=>{
-                              return (
-
-                                <>
-                                  {i.item !== 'Resume'?
-                            
-                              
-                                <span  
-                                style={{cursor:'pointer',
-                                  padding: '8px 16px',
-                                  borderRadius: '20px',
-                                  transition:"all 400ms",
-                                  backgroundColor:`${clickeditem === i.item ? '#ffcece':'transparent'}`
-                                }}
-                                
-                                onMouseEnter={(e) => {
-                                  e.currentTarget.style.backgroundColor = '#ffcece';
-                                }}
-                                onMouseLeave={(e) => {
-                                  e.currentTarget.style.backgroundColor = `${clickeditem === i.item ? '#ffcece':'transparent'}`;
-                                }}
-                                 onClick={()=>redirectToPage(i.item,i.route)}
-                                >{i.item}</span>
-
-                                : <a href={resumelink} target='blank'> <span  
-                                style={{cursor:'pointer',
-                                  padding: '8px 16px',
-                                  borderRadius: '20px',
-                                  transition:"all 400ms",
-                                  backgroundColor:`${clickeditem === i.item ? '#ffcece':'transparent'}`
-                                }}
-                                onMouseEnter={(e) => {
-                                  e.currentTarget.style.backgroundColor = '#ffcece';
-                                }}
-                                onMouseLeave={(e) => {
-                                  e.currentTarget.style.backgroundColor =  `${clickeditem === i.item ? '#ffcece':'transparent'}`;
-                                }}
-                                onClick={()=>setclickeditem(i.item)}
-                                >{i.item}</span> </a>}
-                                 </>
-                              )
-                            })}
-            </div> 
-           
-               
-
-
-            </div>
-
-         <style>
-            {`
-            .navbar {
-                background-color:transparent;
-                height:5rem;
-                transition: all 400ms ;
-
-
-              }
-              
-              .shadow {
-                // background-color:white;
-                height:3.5rem;
-                transition: all 400ms ;
-                --tw-backdrop-blur: blur(8px);
-               backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-
-
-              }
-              
-              .boximage{
-                transition:all 500ms;
-              
-                
-              
-              }
-              .boximage:hover{
-                transform:scale(1.3);
-                transition:all 300ms;
-                box-shadow:1px 1px 15px #999990;
-                transition:all 500ms;
-              }
-
-            
-
-
-              `}
-         </style>
+          style={{
+            flex: 1,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            cursor: 'pointer',
+          }}
+        >
+          <Link to="/" onClick={() => setClickedItem('')}>
+            <p
+              style={{
+                fontSize: '1.5rem',
+                lineHeight: '1.25rem',
+                fontWeight: '700',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                transition: 'all 0.6s ease',
+                width: hasShadow ? '6rem' : '8rem',
+              }}
+            >
+              <img src={logoUrl || '/logo-placeholder.svg'} alt="logo" />
+            </p>
+          </Link>
         </div>
-
-       
-    );
+        <div
+          style={{
+            flex: 1,
+            display: 'flex',
+            gap: '3%',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            color: styles.textSecondary,
+            fontWeight: '700',
+          }}
+        >
+          {itemList.map((i) => (
+            <span
+              key={i.item}
+              style={{
+                cursor: 'pointer',
+                padding: '8px 16px',
+                borderRadius: '20px',
+                transition: 'all 0.4s ease',
+                backgroundColor: clickedItem === i.item ? styles.hoverBackground : 'transparent',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = styles.hoverBackground)}
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                  clickedItem === i.item ? styles.hoverBackground : 'transparent')
+              }
+              onClick={() => redirectToPage(i.item, i.route)}
+            >
+              {i.item !== 'Resume' ? (
+                i.item
+              ) : (
+                <a href={resumeLink} target="_blank" rel="noopener noreferrer">
+                  {i.item}
+                </a>
+              )}
+            </span>
+          ))}
+          <button
+            onClick={toggleTheme}
+            style={{
+              padding: '8px',
+              borderRadius: '50%',
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'background-color 0.3s ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = styles.hoverBackground)}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ width: '24px', height: '24px', fill: 'none', stroke: styles.text }}
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ width: '24px', height: '24px', fill: 'none', stroke: styles.text }}
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
+      </div>
+      <style>
+        {`
+          .navbar {
+            height: 5rem;
+            transition: all 0.4s ease;
+          }
+          .shadow {
+            height: 3.5rem;
+            box-shadow: 0 2px 4px ${styles.navbarShadow};
+            backdrop-filter: blur(8px);
+          }
+          .boximage {
+            transition: all 0.5s ease;
+          }
+          .boximage:hover {
+            transform: scale(1.3);
+            box-shadow: 1px 1px 15px ${styles.navbarShadow};
+            transition: all 0.3s ease;
+          }
+          a {
+            text-decoration: none;
+            color: inherit;
+          }
+          button:hover {
+            background-color: ${styles.hoverBackground};
+          }
+          svg {
+            stroke: ${styles.text};
+          }
+        `}
+      </style>
+    </div>
+  );
 };
 
-export default Navabar;
+export default Navbar;
+
+
+// import React, { useState, useEffect, useContext } from 'react';
+// import { useAuth } from '../../Context/AuthInfo.jsx';
+// import { Link, useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+// import config from '../../config.jsx';
+// import { ThemeContext, themeStyles } from '../../Layout/ThemeContext.jsx';
+// // import { v4 as uuidv4 } from 'uuid'; // Add uuid package for fallback
+
+// const Navbar = () => {
+//   const { userId: authUserId, logout } = useAuth(); // Rename to avoid shadowing
+//   const { theme, toggleTheme } = useContext(ThemeContext);
+//   const [clicked, setClicked] = useState(false);
+//   const [clickedItem, setClickedItem] = useState('');
+//   const [resumeLink, setResumeLink] = useState('');
+//   const [logoUrl, setLogoUrl] = useState('');
+//   const navigate = useNavigate();
+//   const [hasShadow, setHasShadow] = useState(false);
+//   const styles = themeStyles[theme];
+
+//   const redirectToPage = (item, route) => {
+//     setClickedItem(item);
+//     navigate(route);
+//   };
+
+//   const itemList = [
+//     { item: 'Projects', route: '/projects' },
+//     { item: 'Blog', route: '/blogs' },
+//     { item: 'Resume', route: '/' },
+//   ];
+
+//   const getData = async () => {
+//     try {
+//       const response = await axios.get(`${config.apiUrl}/userdata`);
+//       const data = response.data;
+//       if (data) {
+//         setResumeLink(data?.profile[0]?.linkurlcv);
+//         setLogoUrl(data?.profile[0]?.logourl);
+//       }
+//     } catch (error) {
+//       console.error('Error fetching data:', error);
+//     }
+//   };
+
+
+
+//   return (
+//     <div
+//       className={`navbar ${hasShadow ? 'shadow' : ''}`}
+//       style={{
+//         display: 'flex',
+//         width: '100%',
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         position: 'fixed',
+//         zIndex: 999,
+//         transition: 'all 0.4s ease',
+//         backdropFilter: hasShadow ? 'blur(8px)' : 'none',
+//       }}
+//     >
+//       <div
+//         style={{
+//           display: 'flex',
+//           height: '100%',
+//           width: '70%',
+//           justifyContent: 'space-between',
+//           alignItems: 'center',
+//         }}
+//       >
+//         <div
+//           style={{
+//             flex: 1,
+//             display: 'flex',
+//             justifyContent: 'flex-start',
+//             alignItems: 'center',
+//             cursor: 'pointer',
+//           }}
+//         >
+//           <Link to="/" onClick={() => setClickedItem('')}>
+//             <p
+//               style={{
+//                 fontSize: '1.5rem',
+//                 lineHeight: '1.25rem',
+//                 fontWeight: '700',
+//                 letterSpacing: '2px',
+//                 textTransform: 'uppercase',
+//                 transition: 'all 0.6s ease',
+//                 width: hasShadow ? '6rem' : '8rem',
+//               }}
+//             >
+//               <img src={logoUrl || '/logo-placeholder.svg'} alt="logo" />
+//             </p>
+//           </Link>
+//         </div>
+//         <div
+//           style={{
+//             flex: 1,
+//             display: 'flex',
+//             gap: '3%',
+//             alignItems: 'center',
+//             justifyContent: 'flex-end',
+//             color: styles.textSecondary,
+//             fontWeight: '700',
+//           }}
+//         >
+//           {itemList.map((i) => (
+//             <span
+//               key={i.item}
+//               style={{
+//                 cursor: 'pointer',
+//                 padding: '8px 16px',
+//                 borderRadius: '20px',
+//                 transition: 'all 0.4s ease',
+//                 backgroundColor: clickedItem === i.item ? styles.hoverBackground : 'transparent',
+//               }}
+//               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = styles.hoverBackground)}
+//               onMouseLeave={(e) =>
+//                 (e.currentTarget.style.backgroundColor =
+//                   clickedItem === i.item ? styles.hoverBackground : 'transparent')
+//               }
+//               onClick={() => redirectToPage(i.item, i.route)}
+//             >
+//               {i.item !== 'Resume' ? (
+//                 i.item
+//               ) : (
+//                 <a href={resumeLink} target="_blank" rel="noopener noreferrer">
+//                   {i.item}
+//                 </a>
+//               )}
+//             </span>
+//           ))}
+//           <button
+//             onClick={toggleTheme}
+//             style={{
+//               padding: '8px',
+//               borderRadius: '50%',
+//               backgroundColor: 'transparent',
+//               border: 'none',
+//               cursor: 'pointer',
+//               transition: 'background-color 0.3s ease',
+//             }}
+//             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = styles.hoverBackground)}
+//             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+//             aria-label="Toggle theme"
+//           >
+//             {theme === 'light' ? (
+//               <svg
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 style={{ width: '24px', height: '24px', fill: 'none', stroke: styles.text }}
+//                 viewBox="0 0 24 24"
+//               >
+//                 <path
+//                   strokeLinecap="round"
+//                   strokeLinejoin="round"
+//                   strokeWidth={2}
+//                   d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+//                 />
+//               </svg>
+//             ) : (
+//               <svg
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 style={{ width: '24px', height: '24px', fill: 'none', stroke: styles.text }}
+//                 viewBox="0 0 24 24"
+//               >
+//                 <path
+//                   strokeLinecap="round"
+//                   strokeLinejoin="round"
+//                   strokeWidth={2}
+//                   d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+//                 />
+//               </svg>
+//             )}
+//           </button>
+//         </div>
+//       </div>
+//       <style>
+//         {`
+//           .navbar {
+//             height: 5rem;
+//             transition: all 0.4s ease;
+//           }
+//           .shadow {
+//             height: 3.5rem;
+//             box-shadow: 0 2px 4px ${styles.navbarShadow};
+//             backdrop-filter: blur(8px);
+//           }
+//           .boximage {
+//             transition: all 0.5s ease;
+//           }
+//           .boximage:hover {
+//             transform: scale(1.3);
+//             box-shadow: 1px 1px 15px ${styles.navbarShadow};
+//             transition: all 0.3s ease;
+//           }
+//           a {
+//             text-decoration: none;
+//             color: inherit;
+//           }
+//           button:hover {
+//             background-color: ${styles.hoverBackground};
+//           }
+//           svg {
+//             stroke: ${styles.text};
+//           }
+//         `}
+//       </style>
+//     </div>
+//   );
+// };
+
+// export default Navbar;

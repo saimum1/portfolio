@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect ,useContext } from 'react'
 import axios from "axios";
 import config from "../../config.jsx";
 import { Link } from 'react-router-dom';
+import { ThemeContext,themeStyles } from '../../Layout/ThemeContext.jsx';
 
 const Projectpage = () => { 
   const [post, setPost] = useState(null);
+   const { theme, toggleTheme } = useContext(ThemeContext);
+    const styles = themeStyles[theme];
   
   const getdata = async() => {
     const response = await axios.get(`${config.apiUrl}/getdatax`, {
@@ -49,15 +52,17 @@ const Projectpage = () => {
                                           gap: '1rem',
                                           padding: '1rem',
                                           borderRadius: '0.5rem',
-                                          backgroundColor: '#fcf8f7',
-                                          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                                          backgroundColor: styles.cardBackground,
+                                          boxShadow: `${styles.cardBackgroundShadow}`,
                                           transition: 'box-shadow 0.3s ease',
+                                          border:'1px solid #6C757D'
+
                                         }}
-                                        onMouseEnter={(e) => {
-                                          e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.2)';
+                                         onMouseEnter={(e) => {
+                                          e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
                                         }}
                                         onMouseLeave={(e) => {
-                                          e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                                          e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundShadow}`;
                                         }}
                                       >
                                         <div style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
@@ -70,7 +75,8 @@ const Projectpage = () => {
                                               borderRadius: '5px',
                                               border: '1px solid #999999',
                                               overflow: 'hidden',
-                                              boxShadow:'0 10px 20px rgba(0, 0, 0, 0.2)',overflow:'hidden'
+                                                boxShadow:`${styles.imageShadow}`,
+                                              overflow:'hidden'
                                             }}
                                           >
                                             <img
@@ -94,13 +100,13 @@ const Projectpage = () => {
                                             />
                                           </div>
                                         </div>
-                                        <span style={{ flex: 1, color: '#000000', height: '100%', width: '100%', fontSize: '1.6rem', fontWeight: '700', fontFamily: 'ui-sans-serif', textAlign: 'left' }}>
+                                        <span style={{ flex: 1, color: styles.text, height: '100%', width: '100%', fontSize: '1.6rem', fontWeight: '700', fontFamily: 'ui-sans-serif', textAlign: 'left' }}>
                                           {value?.title}
                                         </span>
                                         <span
                                          style={{
                                           flex: 2,
-                                          color: '#6C757D',
+                                          color: styles.text,
                                           height: 'auto', // Changed to auto for dynamic height
                                           width: '100%',
                                           fontSize: '1rem',
