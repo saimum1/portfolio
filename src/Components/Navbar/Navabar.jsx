@@ -117,7 +117,7 @@ const Navbar = () => {
                 letterSpacing: '2px',
                 textTransform: 'uppercase',
                 transition: 'all 0.6s ease',
-                width: hasShadow ? '6rem' : '8rem',
+                width: hasShadow ? '5rem' : '6rem',
               }}
             >
               <img src={logoUrl || '/logo-placeholder.svg'} alt="logo" />
