@@ -85,7 +85,7 @@ const Navbar = () => {
         zIndex: 999,
         // backgroundColor: styles.navbarBackground,
         transition: 'all 0.4s ease',
-        backdropFilter: hasShadow ? 'blur(8px)' : 'none',
+        backdropFilter: hasShadow ? 'blur(3px)' : 'none',
       }}
     >
       <div
@@ -144,6 +144,7 @@ const Navbar = () => {
                 borderRadius: '20px',
                 transition: 'all 0.4s ease',
                 backgroundColor: clickedItem === i.item ? styles.hoverBackground : 'transparent',
+                textShadow: '1px 1px 2px rgba(224, 217, 217, 0.3)',
               }}
               onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
               onMouseLeave={(e) =>(e.currentTarget.style.transform = 'scale(1)')}
@@ -215,7 +216,7 @@ const Navbar = () => {
           .shadow {
             height: 3.5rem;
             box-shadow: 0 2px 4px ${styles.navbarShadow};
-            backdrop-filter: blur(8px);
+            // backdrop-filter: blur(8px);
           }
           .boximage {
             transition: all 0.5s ease;
@@ -244,4 +245,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
 
