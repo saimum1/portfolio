@@ -87,6 +87,7 @@ const Navbar = () => {
         // backgroundColor: styles.navbarBackground,
         transition: 'all 0.4s ease',
         backdropFilter: hasShadow ? 'blur(3px)' : 'none',
+        
       }}
     >
       <div
@@ -217,7 +218,7 @@ const Navbar = () => {
           .shadow {
             height: 3.5rem;
             box-shadow: 0 2px 4px ${styles.navbarShadow};
-            // backdrop-filter: blur(8px);
+         
           }
           .boximage {
             transition: all 0.5s ease;

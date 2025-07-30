@@ -52,10 +52,12 @@ const Projectpage = () => {
                                           gap: '1rem',
                                           padding: '1rem',
                                           borderRadius: '0.5rem',
-                                          backgroundColor: styles.cardBackground,
+                                          // backgroundColor: styles.cardBackground,
                                           boxShadow: `${styles.cardBackgroundShadow}`,
                                           transition: 'box-shadow 0.3s ease',
-                                          border:'1px solid #6C757D'
+                                          border:'1px solid #6C757D',
+
+                                          
 
                                         }}
                                          onMouseEnter={(e) => {

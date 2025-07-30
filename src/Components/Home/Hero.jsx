@@ -260,10 +260,13 @@ const Hero = () => {
                                 gap: '1rem',
                                 padding: '1rem',
                                 borderRadius: '0.5rem',
-                                backgroundColor: styles.cardBackground,
+                                // backgroundColor: styles.cardBackground,
+                                // backgroundColor: styles.cardBackground,
                                 boxShadow: `${styles.cardBackgroundShadow}`,
-                                transition: 'box-shadow 0.3s ease',
-                                border:'1px solid #6C757D'
+                                transition: 'box-shadow 300ms ease',
+                                // backdropFilter:  'blur(13px)' ,
+                                border:'1px solid #6C757D',
+                                
                               }}
                               onMouseEnter={(e) => {
                                 e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
@@ -352,13 +355,9 @@ const Hero = () => {
                          {data?.filter((value)=> {return value?.selected === 'true' && value?.category === 'write'})?.map((value, index) => (
                               <a href={value?.content} target='_blank' >
                                 <div 
-                               onMouseEnter={(e) => {
-                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundShadow}`;
-                              }}
+                              
                                  key={index}
+
                                   style={{
                                      cursor:'pointer',
                                 height: '28rem',
@@ -371,10 +370,20 @@ const Hero = () => {
                                 padding: '1rem',
                                 borderRadius: '0.5rem',
                                 border:'1px solid #6C757D',
-                                backgroundColor: styles.cardBackground,
+                                // backgroundColor: styles.cardBackground,
                                 boxShadow: `${styles.cardBackgroundShadow}`,
-                                transition: 'box-shadow 0.3s ease',
+                                transition: 'box-shadow 300ms ease',
+
                               }}
+
+
+                               onMouseEnter={(e) => {
+                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundShadow}`;
+                              }}
+                              
                               >
 
                               <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>

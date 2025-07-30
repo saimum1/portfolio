@@ -40,12 +40,7 @@ const Blogpage = () => {
                          {post?.filter((value)=> {return  value?.category === 'write'})?.map((value, index) => (
                               <a href={value?.content} target='_blank'> 
                                 <div 
-                                 onMouseEnter={(e) => {
-                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundShadow}`;
-                              }}
+                                
                                  key={index}
                                   style={{
                                      cursor:'pointer',
@@ -57,10 +52,18 @@ const Blogpage = () => {
                                 flexDirection: 'column',
                                 // gap: '1rem',
                                 padding: '1rem',
-                                borderRadius: '0.5rem',
-                                 backgroundColor: styles.cardBackground,
+                                border:'1px solid #6C757D',
+                                //  backgroundColor: styles.cardBackground,
                                 boxShadow: `${styles.cardBackgroundShadow}`,
-                                transition: 'box-shadow 0.3s ease',
+                                borderRadius: '0.5rem',
+                                transition: 'box-shadow 300ms ease',
+                              }}
+
+                               onMouseEnter={(e) => {
+                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundShadow}`;
                               }}
                                   >
 
