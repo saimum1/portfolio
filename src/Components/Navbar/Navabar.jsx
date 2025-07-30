@@ -138,17 +138,15 @@ const Navbar = () => {
             <span
               key={i.item}
               style={{
+                color:styles.text,
                 cursor: 'pointer',
                 padding: '8px 16px',
                 borderRadius: '20px',
                 transition: 'all 0.4s ease',
                 backgroundColor: clickedItem === i.item ? styles.hoverBackground : 'transparent',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = styles.hoverBackground)}
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor =
-                  clickedItem === i.item ? styles.hoverBackground : 'transparent')
-              }
+              onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
+              onMouseLeave={(e) =>(e.currentTarget.style.transform = 'scale(1)')}
               onClick={() => redirectToPage(i.item, i.route)}
             >
               {i.item !== 'Resume' ? (

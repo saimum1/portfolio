@@ -42,7 +42,7 @@ export const themeStyles = {
 
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(localStorage.getItem('user-theme') || 'light');
+  const [theme, setTheme] = useState(localStorage.getItem('user-theme') || 'dark');
 
   useEffect(() => {
     localStorage.setItem('user-theme', theme);
