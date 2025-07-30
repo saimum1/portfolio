@@ -39,6 +39,7 @@ const Navbar = () => {
     try {
       const response = await axios.get(`${config.apiUrl}/userdata`);
       const data = response.data;
+      console.log("respondedata",response)
       if (data) {
         setResumeLink(data?.profile[0]?.linkurlcv);
         setLogoUrl(data?.profile[0]?.logourl);
