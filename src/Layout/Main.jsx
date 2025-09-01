@@ -48,7 +48,7 @@ const Main = () => {
       }}
     >
       <Navbar />
-      <Outlet />
+        <Outlet />
       <Footersec />
     </div>
   );

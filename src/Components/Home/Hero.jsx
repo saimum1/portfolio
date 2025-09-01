@@ -115,7 +115,11 @@ const Hero = () => {
 
   
   return (
-    <div style={{transition: 'background-color 0.3s ease, color 0.3s ease',width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column'}}>
+    <div style={{ transition: 'background-color 0.3s ease, color 0.3s ease',width:'100%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column'}}>
+
+
+
+                
 
               <div style={{width:'70%' ,height:'100%',display:'flex' ,alignItems:'center',justifyContent:'center' ,flexDirection:'column',marginTop:'4.5rem',background:''}}>
 
@@ -246,7 +250,7 @@ const Hero = () => {
                      
                       <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', transition: 'all 300ms', cursor: 'pointer' }}>
                         {data?.filter((value) => value?.selected === 'true' && value?.category === 'post')?.map((value, index) => (
-                          <Link to={`/postpage/${value?.postid}`}>
+                          
                             <div
                               key={index}
                               style={{
@@ -260,6 +264,7 @@ const Hero = () => {
                                 gap: '1rem',
                                 padding: '1rem',
                                 borderRadius: '0.5rem',
+                                 height: '100%', width: '100%',
                                 // backgroundColor: styles.cardBackground,
                                 // backgroundColor: styles.cardBackground,
                                 boxShadow: `${styles.cardBackgroundShadow}`,
@@ -275,6 +280,20 @@ const Hero = () => {
                                 e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundShadow}`;
                               }}
                             >
+<Link to={`/postpage/${value?.postid}`}>
+                              <div style={{
+                                cursor:'pointer',
+                                // height: '29rem',
+                                // width: '100%',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                flexDirection: 'column',
+                                gap: '1rem',
+                                
+                                // padding: '1rem',
+                                
+                              }}>
                               <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
                                 <div
                                   className="box"
@@ -330,8 +349,61 @@ const Hero = () => {
                               >
                                 {value?.description}
                               </span>
+
+                              </div>
+                             </Link>
+                             
+                             
+                             
+                              <div style={{width:'100%',flex:1,display:'flex',justifyContent:'flex-end',alignItems:'flex-end'}}>
+                                 
+                                <a href={value?.livelink} target='_blank'> <span
+                                    style={{ // White button background like in the image
+                                    color: styles.text, // Red text to match the theme
+                                    padding: '5px 20px',
+                                    borderRadius: '4px', // Rounded buttons
+                                    fontSize: '16px',
+                                    fontWeight: '600',
+                                    cursor: 'pointer',
+                                    boxShadow: `${styles.imageShadow}`, 
+                                    transition: 'box-shadow 300ms ease',
+                                  }}
+                                  onMouseEnter={(e) => {
+                                   e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.boxShadow = ` ${styles.imageShadow}`;
+                                  }}
+                              >
+                                    Live view
+                                  </span>
+                                  </a>
+
+                                  <a href={value?.gitlink} target='_blank'> 
+                                  <span
+                                    style={{ // White button background like in the image
+                                    color: styles.text, // Red text to match the theme
+                                    padding: '5px 20px',
+                                    borderRadius: '4px', // Rounded buttons
+                                    fontSize: '16px',
+                                    fontWeight: '600',
+                                    cursor: 'pointer',
+                                    boxShadow: `${styles.imageShadow}`, 
+                                    transition: 'box-shadow 300ms ease',
+                                  }}
+                                  onMouseEnter={(e) => {
+                                   e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.boxShadow = ` ${styles.imageShadow}`;
+                                  }}
+                              >
+                                    Git link
+                                  </span>
+                                  </a>
+                              </div>
                             </div>
-                          </Link>
+                    
                         ))}
                       </div>
                   </div>

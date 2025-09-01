@@ -36,7 +36,7 @@ const Projectpage = () => {
         <div style={{width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', gap:'1.5rem'}}>
           <div style={{width:'100%', flex:'1', display:'flex', justifyContent:'flex-start', flexDirection:'column', gap:'1rem'}}></div>
           
-           <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', transition: 'all 300ms', cursor: 'pointer' }}>
+          {/* <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', transition: 'all 300ms', cursor: 'pointer' }}>
                                   {post?.filter((value) => {return value?.category === 'post'})?.map((value, index) => (
                                     <Link to={`/postpage/${value?.postid}`}>
                                       <div
@@ -127,7 +127,165 @@ const Projectpage = () => {
                                       </div>
                                     </Link>
                                   ))}
-                                </div>
+            </div>  */}
+         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', transition: 'all 300ms', cursor: 'pointer' }}>
+                                    {post?.filter((value) => {return value?.category === 'post'})?.map((value, index) => (
+                                      
+                                        <div
+                                          key={index}
+                                          style={{
+                                            cursor:'pointer',
+                                            height: '29rem',
+                                            width: '100%',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                            flexDirection: 'column',
+                                            gap: '1rem',
+                                            padding: '1rem',
+                                            borderRadius: '0.5rem',
+                                             height: '100%', width: '100%',
+                                            // backgroundColor: styles.cardBackground,
+                                            // backgroundColor: styles.cardBackground,
+                                            boxShadow: `${styles.cardBackgroundShadow}`,
+                                            transition: 'box-shadow 300ms ease',
+                                            // backdropFilter:  'blur(13px)' ,
+                                            border:'1px solid #6C757D',
+                                            
+                                          }}
+                                          onMouseEnter={(e) => {
+                                            e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
+                                          }}
+                                          onMouseLeave={(e) => {
+                                            e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundShadow}`;
+                                          }}
+                                        >
+            <Link to={`/postpage/${value?.postid}`}>
+                                          <div style={{
+                                            cursor:'pointer',
+                                            // height: '29rem',
+                                            // width: '100%',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                            flexDirection: 'column',
+                                            gap: '1rem',
+                                            
+                                            // padding: '1rem',
+                                            
+                                          }}>
+                                          <div  style={{ flex: 4, backgroundColor: '', height: '100%', width: '100%' }}>
+                                            <div
+                                              className="box"
+                                              style={{
+                                                flex: 4,
+                                                height: '100%',
+                                                width: '100%',
+                                                borderRadius: '5px',
+                                                overflow: 'hidden',
+                                                boxShadow:`${styles.imageShadow}`
+                                                //  boxShadow:`0 2px 4px` ,
+                                              }}
+                                            >
+                                              <img
+                                                className="boximage"
+                                                src={`${value?.image_url}`}
+                                                style={{
+                                                  height: '14rem',
+                                                  width: '100%',
+                                                  borderRadius: '5px',
+                                                  transition: 'transform 0.3s ease',
+                                                  transform: 'scale(1)',
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                  e.currentTarget.style.transform = 'scale(1.1)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                  e.currentTarget.style.transform = 'scale(1)';
+                                                }}
+                                                alt="Featured"
+                                              />
+                                            </div>
+                                          </div>
+                                          <span style={{ flex: 1,  color: styles.text, height: '100%', width: '100%', fontSize: '1.6rem', fontWeight: '700', fontFamily: 'ui-sans-serif', textAlign: 'left' }}>
+                                            {value?.title}
+                                          </span>
+                                          <span 
+                                            style={{
+                                                    flex: 2,
+                                                    color: styles.text,
+                                                    height: 'auto', // Changed to auto for dynamic height
+                                                    width: '100%',
+                                                    fontSize: '1rem',
+                                                    fontWeight: '400',
+                                                    fontFamily: 'ui-sans-serif',
+                                                    wordBreak: 'break-word', // Ensures text breaks at word boundaries
+                                                    overflowWrap: 'break-word', // Allows long words to wrap
+                                                    whiteSpace: 'normal', // Prevents text from overflowing
+                                                    lineHeight: '1.4', // Improves readability with consistent line spacing
+                                                    overflow: 'hidden', // Hides any overflow if necessary
+                                                    textOverflow: 'ellipsis', // Optional: adds ellipsis if text is truncated
+                                                  }}
+                                          >
+                                            {value?.description}
+                                          </span>
+            
+                                          </div>
+                                         </Link>
+                                         
+                                         
+                                         
+                                          <div style={{width:'100%',flex:1,display:'flex',justifyContent:'flex-end',alignItems:'flex-end'}}>
+                                             
+                                            <a href={value?.livelink} target='_blank'> <span
+                                                style={{ // White button background like in the image
+                                                color: styles.text, // Red text to match the theme
+                                                padding: '5px 20px',
+                                                borderRadius: '4px', // Rounded buttons
+                                                fontSize: '16px',
+                                                fontWeight: '600',
+                                                cursor: 'pointer',
+                                                boxShadow: `${styles.imageShadow}`, 
+                                                transition: 'box-shadow 300ms ease',
+                                              }}
+                                              onMouseEnter={(e) => {
+                                               e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
+                                              }}
+                                              onMouseLeave={(e) => {
+                                                e.currentTarget.style.boxShadow = ` ${styles.imageShadow}`;
+                                              }}
+                                          >
+                                                Live view
+                                              </span>
+                                              </a>
+            
+                                              <a href={value?.gitlink} target='_blank'> 
+                                              <span
+                                                style={{ // White button background like in the image
+                                                color: styles.text, // Red text to match the theme
+                                                padding: '5px 20px',
+                                                borderRadius: '4px', // Rounded buttons
+                                                fontSize: '16px',
+                                                fontWeight: '600',
+                                                cursor: 'pointer',
+                                                boxShadow: `${styles.imageShadow}`, 
+                                                transition: 'box-shadow 300ms ease',
+                                              }}
+                                              onMouseEnter={(e) => {
+                                               e.currentTarget.style.boxShadow = ` ${styles.cardBackgroundHoverShadow}`;
+                                              }}
+                                              onMouseLeave={(e) => {
+                                                e.currentTarget.style.boxShadow = ` ${styles.imageShadow}`;
+                                              }}
+                                          >
+                                                Git link
+                                              </span>
+                                              </a>
+                                          </div>
+                                        </div>
+                                
+                                    ))}
+                                  </div> 
         </div>
         <div style={{height:'4rem'}}></div>
       </div> 
